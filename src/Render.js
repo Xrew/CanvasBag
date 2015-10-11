@@ -2,6 +2,8 @@
 ///<reference path="./containers/ContainerType" />
 ///<reference path="./sprites/SpriteType" />
 ///<reference path="./shapes/ShapeType.ts" />
+///<reference path="./connections/ConnectionType" />
+///<reference path="./connections/SimpleConnection" />
 var CanvasBag;
 (function (CanvasBag) {
     var Render = (function () {
@@ -67,7 +69,7 @@ var CanvasBag;
                 text.getProperties().width = _this.context.measureText(properties.content).width;
                 text.getProperties().height = parseInt(properties.fontSize);
                 properties = text.getProperties();
-                _this.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
+                _this.context.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
             };
             this.renderImage = function (image) {
                 var properties = image.getProperties();
@@ -78,11 +80,12 @@ var CanvasBag;
                 _this.context.beginPath();
                 _this.context.rect(Math.floor(properties.position.x + renderOffset.x - halfWidth) + 0.5, Math.floor(properties.position.y + renderOffset.y - halfHeight) + 0.5, properties.width, properties.height);
 
+                var _context = _this.context;
                 if (properties.imageData !== undefined && properties.imageData !== null) {
                     var img = new Image();
 
                     img.onload = function () {
-                        _this.context.drawImage(_this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
+                        _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                     };
 
                     img.src = "data:image/gif;base64," + properties.imageData;
@@ -99,11 +102,13 @@ var CanvasBag;
                 _this.context.beginPath();
                 _this.context.rect(Math.floor(properties.position.x + renderOffset.x - halfWidth) + 0.5, Math.floor(properties.position.y + renderOffset.y - halfHeight) + 0.5, properties.width, properties.height);
 
+                var _context = _this.context;
+
                 if (properties.base64Background !== undefined && properties.base64Background !== null) {
                     var img = new Image();
 
                     img.onload = function () {
-                        _this.context.drawImage(_this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
+                        _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                     };
 
                     img.src = "data:image/gif;base64," + properties.base64Background;
@@ -210,7 +215,7 @@ var CanvasBag;
             };
             this.renderConnection = function (connection) {
                 switch (connection.getType()) {
-                    case CanvasBag.ConnectionType.SIMPLE:
+                    case 0 /* SIMPLE */:
                         _this.renderSimpleConnection(connection);
                         break;
                     default:
@@ -281,7 +286,7 @@ var CanvasBag;
                         _this.draggingMousePositionPrevious = mousePosition;
                     } else if (element !== null && innerContainerElement !== null && innerContainerElement.isJoinAble()) {
                         _this.joiningElementStart = innerContainerElement;
-                        _this.newConnection = new BasicConnection.SimpleConnection();
+                        _this.newConnection = new CanvasBag.Connections.SimpleConnection();
                         _this.newConnection.setBindings({ entry: _this.joiningElementStart, end: null });
                         _this.newConnection.setTemporaryEnd(mousePosition);
                         _this.joiningMousePosition = mousePosition;

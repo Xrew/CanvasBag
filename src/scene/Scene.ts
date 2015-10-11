@@ -181,10 +181,12 @@ module CanvasBag {
             private  tryToFindNodeInSceneById = (nodeId, investigatedNode) => {
                 if (investigatedNode.id != nodeId) {
                     if (investigatedNode.nodes != undefined && investigatedNode.nodes != null) {
-                        var candidate = this.tryToFindNodeInSceneById(nodeId);
-                        if (candidate != null) {
-                            return candidate;
-                        }
+                        investigatedNode.forEach((node) => {
+                            var candidate = this.tryToFindNodeInSceneById(nodeId, node);
+                            if (candidate != null) {
+                                return candidate;
+                            }
+                        })
                     }
                 }
 

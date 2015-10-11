@@ -2,6 +2,8 @@
 ///<reference path="./containers/ContainerType" />
 ///<reference path="./sprites/SpriteType" />
 ///<reference path="./shapes/ShapeType.ts" />
+///<reference path="./connections/ConnectionType" />
+///<reference path="./connections/SimpleConnection" />
 
 module CanvasBag {
     class Render {
@@ -104,7 +106,7 @@ module CanvasBag {
             text.getProperties().width = this.context.measureText(properties.content).width;
             text.getProperties().height = parseInt(properties.fontSize);
             properties = text.getProperties();
-            this.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
+            this.context.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
         };
 
         private  renderImage = (image) => {
@@ -121,11 +123,12 @@ module CanvasBag {
                 properties.height
             );
 
+            var _context = this.context;
             if (properties.imageData !== undefined && properties.imageData !== null) {
                 var img = new Image();
 
-                img.onload = () => {
-                    this.context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
+                img.onload = function() {
+                    _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                 };
 
                 img.src = "data:image/gif;base64," + properties.imageData;
@@ -148,18 +151,21 @@ module CanvasBag {
                 properties.height
             );
 
+            var _context = this.context;
+
             if (properties.base64Background !== undefined && properties.base64Background !== null) {
                 var img = new Image();
 
-                img.onload = () => {
-                    this.context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
+                img.onload = function() {
+                    _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                 };
 
                 img.src = "data:image/gif;base64," + properties.base64Background;
             }
 
             this.finalizeRender(properties);
-        }
+        };
+
         private renderCircle = (shape) => {
             var properties = shape.getProperties();
             var renderOffset = shape.getRenderOffset();
@@ -265,7 +271,7 @@ module CanvasBag {
 
         private renderConnection = (connection) => {
             switch (connection.getType()) {
-                case CanvasBag.ConnectionType.SIMPLE:
+                case ConnectionType.SIMPLE:
                     this.renderSimpleConnection(connection);
                     break;
                 default:
@@ -346,7 +352,7 @@ module CanvasBag {
                     && innerContainerElement !== null
                     && innerContainerElement.isJoinAble()) {
                     this.joiningElementStart = innerContainerElement;
-                    this.newConnection = new BasicConnection.SimpleConnection();
+                    this.newConnection = new Connections.SimpleConnection();
                     this.newConnection.setBindings({entry: this.joiningElementStart, end: null});
                     this.newConnection.setTemporaryEnd(mousePosition);
                     this.joiningMousePosition = mousePosition;

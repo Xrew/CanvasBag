@@ -148,10 +148,12 @@ var CanvasBag;
                 this.tryToFindNodeInSceneById = function (nodeId, investigatedNode) {
                     if (investigatedNode.id != nodeId) {
                         if (investigatedNode.nodes != undefined && investigatedNode.nodes != null) {
-                            var candidate = _this.tryToFindNodeInSceneById(nodeId);
-                            if (candidate != null) {
-                                return candidate;
-                            }
+                            investigatedNode.forEach(function (node) {
+                                var candidate = _this.tryToFindNodeInSceneById(nodeId, node);
+                                if (candidate != null) {
+                                    return candidate;
+                                }
+                            });
                         }
                     }
 
