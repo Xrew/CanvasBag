@@ -1,0 +1,10 @@
+.idea
+node_modules/**/*.*
+
+node_modules
+external-libs
+.tscache
+*.html
+*.map
+bower_components
+lib
