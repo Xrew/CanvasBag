@@ -10,25 +10,28 @@ var __extends = this.__extends || function (d, b) {
 };
 var CanvasBag;
 (function (CanvasBag) {
-    var Custom = (function (_super) {
-        __extends(Custom, _super);
-        function Custom() {
-            var _this = this;
-            _super.call(this);
-            this.contains = function (point) {
-                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
-            };
-            this.move = function (offsetX, offsetY) {
-                var properties = _this.getProperties();
-                for (var i = 0; i < properties.points.length; i++) {
-                    properties.points[i].x += offsetX;
-                    properties.points[i].y += offsetY;
-                }
-            };
-            this.setType(3 /* CUSTOM_SHAPE */);
-        }
-        return Custom;
-    })(CanvasBag.BasicShapePrototype);
-    CanvasBag.Custom = Custom;
+    (function (BasicShapes) {
+        var Custom = (function (_super) {
+            __extends(Custom, _super);
+            function Custom() {
+                var _this = this;
+                _super.call(this);
+                this.contains = function (point) {
+                    return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
+                };
+                this.move = function (offsetX, offsetY) {
+                    var properties = _this.getProperties();
+                    for (var i = 0; i < properties.points.length; i++) {
+                        properties.points[i].x += offsetX;
+                        properties.points[i].y += offsetY;
+                    }
+                };
+                this.setType(3 /* CUSTOM_SHAPE */);
+            }
+            return Custom;
+        })(CanvasBag.BasicShapePrototype);
+        BasicShapes.Custom = Custom;
+    })(CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
+    var BasicShapes = CanvasBag.BasicShapes;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=Custom.js.map

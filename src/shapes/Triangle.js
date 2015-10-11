@@ -10,25 +10,28 @@ var __extends = this.__extends || function (d, b) {
 };
 var CanvasBag;
 (function (CanvasBag) {
-    var Triangle = (function (_super) {
-        __extends(Triangle, _super);
-        function Triangle() {
-            var _this = this;
-            _super.call(this);
-            this.contains = function (point) {
-                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
-            };
-            this.move = function (offsetX, offsetY) {
-                var properties = _this.getProperties();
-                for (var i = 0; i < properties.points.length; i++) {
-                    properties.points[i].x += offsetX;
-                    properties.points[i].y += offsetY;
-                }
-            };
-            this.setType(1 /* TRIANGLE */);
-        }
-        return Triangle;
-    })(CanvasBag.BasicShapePrototype);
-    CanvasBag.Triangle = Triangle;
+    (function (BasicShapes) {
+        var Triangle = (function (_super) {
+            __extends(Triangle, _super);
+            function Triangle() {
+                var _this = this;
+                _super.call(this);
+                this.contains = function (point) {
+                    return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
+                };
+                this.move = function (offsetX, offsetY) {
+                    var properties = _this.getProperties();
+                    for (var i = 0; i < properties.points.length; i++) {
+                        properties.points[i].x += offsetX;
+                        properties.points[i].y += offsetY;
+                    }
+                };
+                this.setType(1 /* TRIANGLE */);
+            }
+            return Triangle;
+        })(CanvasBag.BasicShapePrototype);
+        BasicShapes.Triangle = Triangle;
+    })(CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
+    var BasicShapes = CanvasBag.BasicShapes;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=Triangle.js.map

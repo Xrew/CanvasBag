@@ -1,9 +1,12 @@
 ///<reference path="./render/RenderedPoint.ts" />
+///<reference path="./containers/ContainerType" />
+///<reference path="./sprites/SpriteType" />
+///<reference path="./shapes/ShapeType.ts" />
 
 module CanvasBag {
     class Render {
         private static RENDERING_INTERVAL = 40;
-        private context;
+        private context: CanvasRenderingContext2D;
         private canvas;
         private scene;
         private canvasValid;
@@ -98,7 +101,7 @@ module CanvasBag {
             var renderOffset = text.getRenderOffset();
 
             this.context.font = properties.fontSize + " " + properties.fontFamily;
-            text.getProperties().width = this..measureText(properties.content).width;
+            text.getProperties().width = this.context.measureText(properties.content).width;
             text.getProperties().height = parseInt(properties.fontSize);
             properties = text.getProperties();
             this.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
@@ -236,7 +239,7 @@ module CanvasBag {
                 case ShapeType.RECTANGLE:
                     this.renderRectangle(node);
                     break;
-                case  ShapeType.CIRCLE:
+                case ShapeType.CIRCLE:
                     this.renderCircle(node);
                     break;
                 case ShapeType.TRIANGLE:
@@ -343,11 +346,11 @@ module CanvasBag {
                     && innerContainerElement !== null
                     && innerContainerElement.isJoinAble()) {
                     this.joiningElementStart = innerContainerElement;
-                    this.newConnection = new CanvasBag.BasicConnection.SimpleConnection();
-                    newConnection.setBindings({entry: joiningElementStart, end: null});
-                    newConnection.setTemporaryEnd(mousePosition);
+                    this.newConnection = new BasicConnection.SimpleConnection();
+                    this.newConnection.setBindings({entry: this.joiningElementStart, end: null});
+                    this.newConnection.setTemporaryEnd(mousePosition);
                     this.joiningMousePosition = mousePosition;
-                    this.scene.addConnection(newConnection);
+                    this.scene.addConnection(this.newConnection);
                 }
             });
 
@@ -380,7 +383,7 @@ module CanvasBag {
                 } else if (this.joiningElementStart !== null) {
                     var mousePosition = this.getMousePosition(e);
                     var joiningShapeEnd = this.detectElement(mousePosition);
-                    if (joiningShapeEnd != null && joiningShapeEnd.getType() == CanvasBag.ContainerType.BASIC) {
+                    if (joiningShapeEnd != null && joiningShapeEnd.getType() == ContainerType.BASIC) {
                         joiningShapeEnd = joiningShapeEnd.detectInnerShape(mousePosition);
                     }
                     if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {

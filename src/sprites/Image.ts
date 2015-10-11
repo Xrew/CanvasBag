@@ -1,13 +1,13 @@
-///<reference path="./ShapeType" />
-///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="./SpriteType" />
+///<reference path="./BasicSpritePrototype" />
+///<reference path="./BasicSprite" />
 
 module CanvasBag {
-    export module BasicShapes {
-        export class Rectangle extends BasicShapePrototype implements BasicShape {
+    export module Sprites {
+        export class Image extends BasicSpritePrototype implements BasicSprite {
             constructor() {
                 super();
-                this.setType(ShapeType.RECTANGLE)
+                this.setType(SpriteType.IMAGE)
             }
 
             public contains = (point):boolean => {
@@ -24,6 +24,7 @@ module CanvasBag {
 
             public  move = (offsetX, offsetY) => {
                 var properties = this.getProperties();
+
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };

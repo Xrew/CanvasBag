@@ -1,6 +1,6 @@
-///<reference path="./ShapeType" />
-///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="./SpriteType" />
+///<reference path="./BasicSpritePrototype" />
+///<reference path="./BasicSprite" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9,10 +9,10 @@ var __extends = this.__extends || function (d, b) {
 };
 var CanvasBag;
 (function (CanvasBag) {
-    (function (BasicShapes) {
-        var Rectangle = (function (_super) {
-            __extends(Rectangle, _super);
-            function Rectangle() {
+    (function (Sprites) {
+        var Image = (function (_super) {
+            __extends(Image, _super);
+            function Image() {
                 var _this = this;
                 _super.call(this);
                 this.contains = function (point) {
@@ -28,15 +28,16 @@ var CanvasBag;
                 };
                 this.move = function (offsetX, offsetY) {
                     var properties = _this.getProperties();
+
                     properties.position.x += offsetX;
                     properties.position.y += offsetY;
                 };
-                this.setType(0 /* RECTANGLE */);
+                this.setType(0 /* IMAGE */);
             }
-            return Rectangle;
-        })(CanvasBag.BasicShapePrototype);
-        BasicShapes.Rectangle = Rectangle;
-    })(CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
-    var BasicShapes = CanvasBag.BasicShapes;
+            return Image;
+        })(CanvasBag.BasicSpritePrototype);
+        Sprites.Image = Image;
+    })(CanvasBag.Sprites || (CanvasBag.Sprites = {}));
+    var Sprites = CanvasBag.Sprites;
 })(CanvasBag || (CanvasBag = {}));
-//# sourceMappingURL=Rectangle.js.map
+//# sourceMappingURL=Image.js.map
