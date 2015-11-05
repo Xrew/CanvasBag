@@ -1,8 +1,11 @@
 var CanvasBag;
 (function (CanvasBag) {
-    (function (ContainerType) {
-        ContainerType[ContainerType["BASIC"] = 0] = "BASIC";
-    })(CanvasBag.ContainerType || (CanvasBag.ContainerType = {}));
-    var ContainerType = CanvasBag.ContainerType;
+    var ContainerType = (function () {
+        function ContainerType() {
+        }
+        ContainerType.BASIC = "BASIC";
+        return ContainerType;
+    })();
+    CanvasBag.ContainerType = ContainerType;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=ContainerType.js.map

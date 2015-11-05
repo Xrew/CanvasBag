@@ -1,9 +1,12 @@
 var CanvasBag;
 (function (CanvasBag) {
-    (function (SpriteType) {
-        SpriteType[SpriteType["IMAGE"] = 0] = "IMAGE";
-        SpriteType[SpriteType["TEXT"] = 1] = "TEXT";
-    })(CanvasBag.SpriteType || (CanvasBag.SpriteType = {}));
-    var SpriteType = CanvasBag.SpriteType;
+    var SpriteType = (function () {
+        function SpriteType() {
+        }
+        SpriteType.IMAGE = "IMAGE";
+        SpriteType.TEXT = "TEXT";
+        return SpriteType;
+    })();
+    CanvasBag.SpriteType = SpriteType;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=SpriteType.js.map

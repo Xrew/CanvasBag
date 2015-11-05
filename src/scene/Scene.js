@@ -39,19 +39,24 @@ var CanvasBag;
                 this.addNode = function (node) {
                     _this.nodes.push(node);
                     _this.invalidateScene();
+                    return _this;
                 };
                 this.addShape = function (shape) {
                     _this.addNode(shape);
+                    return _this;
                 };
                 this.addContainer = function (container) {
                     _this.addNode(container);
+                    return _this;
                 };
                 this.addSprite = function (sprite) {
                     _this.addNode(sprite);
+                    return _this;
                 };
                 this.addConnection = function (connection) {
                     _this.connections.push(connection);
                     _this.invalidateScene();
+                    return _this;
                 };
                 this.removeConnectionById = function (connectionId) {
                     for (var i = 0; i < _this.connections.length; i++) {
@@ -97,7 +102,7 @@ var CanvasBag;
                 this.fromJSON = function (json) {
                     if (CanvasBag.ObjectUtils.hasDefinedProperty(json, 'type')) {
                         switch (json.type) {
-                            case 0 /* BASIC */:
+                            case CanvasBag.SceneType.BASIC:
                                 if (CanvasBag.ObjectUtils.hasDefinedProperty(json, 'nodes')) {
                                     json.nodes.forEach(function (node) {
                                         if (!CanvasBag.ObjectUtils.hasDefinedProperty(node, 'type')) {
@@ -106,23 +111,23 @@ var CanvasBag;
                                         }
                                         var imported = null;
                                         switch (node.type) {
-                                            case 0 /* RECTANGLE */:
+                                            case CanvasBag.ShapeType.RECTANGLE:
                                                 imported = new CanvasBag.BasicShapes.Rectangle();
                                                 imported.fromJSON(node);
                                                 break;
-                                            case 2 /* CIRCLE */:
+                                            case CanvasBag.ShapeType.CIRCLE:
                                                 imported = new CanvasBag.BasicShapes.Circle();
                                                 imported.fromJSON(node);
                                                 break;
-                                            case 1 /* TRIANGLE */:
+                                            case CanvasBag.ShapeType.TRIANGLE:
                                                 imported = new CanvasBag.BasicShapes.Triangle();
                                                 imported.fromJSON(node);
                                                 break;
-                                            case 3 /* CUSTOM_SHAPE */:
+                                            case CanvasBag.ShapeType.CUSTOM_SHAPE:
                                                 imported = new CanvasBag.BasicShapes.Custom();
                                                 imported.fromJSON(node);
                                                 break;
-                                            case 0 /* BASIC */:
+                                            case CanvasBag.ContainerType.BASIC:
                                                 imported = new CanvasBag.Container.Basic();
                                                 imported.fromJSON(node);
                                                 break;
@@ -132,7 +137,8 @@ var CanvasBag;
                                         }
                                         _this.nodes.push(imported);
                                     });
-                                } else {
+                                }
+                                else {
                                     _this.printSceneErrMessage("Please check if scene type is set correctly.");
                                 }
                                 _this.sprites = json.sprites;
@@ -141,7 +147,8 @@ var CanvasBag;
                             default:
                                 _this.printSceneErrMessage("Unknown type of scene. Cannot import JSON object.");
                         }
-                    } else {
+                    }
+                    else {
                         _this.printSceneErrMessage("Please check if scene type is set correctly.");
                     }
                 };
@@ -156,14 +163,13 @@ var CanvasBag;
                             });
                         }
                     }
-
                     return null;
                 };
                 this.printSceneErrMessage = function (msg) {
                     console.log("Defined JSON of scene is not valid. " + msg);
                 };
                 this.id = CanvasBag.Guid.generate();
-                this.type = 0 /* BASIC */;
+                this.type = CanvasBag.SceneType.BASIC;
                 this.nodes = [];
                 this.connections = [];
                 this.sprites = [];
@@ -172,6 +178,6 @@ var CanvasBag;
             return Basic;
         })();
         Scene.Basic = Basic;
-    })(Scene || (Scene = {}));
+    })(Scene = CanvasBag.Scene || (CanvasBag.Scene = {}));
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=Scene.js.map

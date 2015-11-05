@@ -48,19 +48,15 @@ var CanvasBag;
         BasicConnectionPrototype.prototype.click = function () {
             this.onClickCallback();
         };
-
         BasicConnectionPrototype.prototype.setOnClickListener = function (callback) {
             this.onClickCallback = callback;
         };
-
         BasicConnectionPrototype.prototype.getBindings = function () {
             return this.bindings;
         };
-
         BasicConnectionPrototype.prototype.setBindings = function (bindings) {
             this.bindings = bindings;
         };
-
         BasicConnectionPrototype.prototype.getTemporaryEnd = function () {
             return this.temporaryEnd;
         };

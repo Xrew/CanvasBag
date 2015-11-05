@@ -11,6 +11,7 @@
 ///<reference path="../shapes/Triangle" />
 var CanvasBag;
 (function (CanvasBag) {
+    var Container;
     (function (Container) {
         var Basic = (function () {
             function Basic() {
@@ -64,12 +65,10 @@ var CanvasBag;
                     }
                     _this.id = json.id;
                     _this.type = json.type;
-
                     if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'elements')) {
                         json.elements = [];
                         _this.printWarningBasicContainer("elements");
                     }
-
                     json.elements.forEach(function (element) {
                         if (!CanvasBag.ObjectUtils.hasDefinedProperty(element, 'type')) {
                             _this.printErrorBasicContainer("Type of node is not defined");
@@ -77,25 +76,25 @@ var CanvasBag;
                         }
                         var imported = null;
                         switch (element.type) {
-                            case 0 /* RECTANGLE */:
+                            case CanvasBag.ShapeType.RECTANGLE:
                                 imported = new CanvasBag.BasicShapes.Rectangle();
                                 break;
-                            case 2 /* CIRCLE */:
+                            case CanvasBag.ShapeType.CIRCLE:
                                 imported = new CanvasBag.BasicShapes.Circle();
                                 break;
-                            case 1 /* TRIANGLE */:
+                            case CanvasBag.ShapeType.TRIANGLE:
                                 imported = new CanvasBag.BasicShapes.Triangle();
                                 break;
-                            case 3 /* CUSTOM_SHAPE */:
+                            case CanvasBag.ShapeType.CUSTOM_SHAPE:
                                 imported = new CanvasBag.BasicShapes.Custom();
                                 break;
-                            case 0 /* BASIC */:
+                            case CanvasBag.ContainerType.BASIC:
                                 imported = new Container.Basic();
                                 break;
-                            case 0 /* IMAGE */:
+                            case CanvasBag.SpriteType.IMAGE:
                                 imported = new CanvasBag.Sprites.Image();
                                 break;
-                            case 1 /* TEXT */:
+                            case CanvasBag.SpriteType.TEXT:
                                 imported = new CanvasBag.Sprites.Text();
                                 break;
                             default:
@@ -105,7 +104,6 @@ var CanvasBag;
                         imported.fromJSON(element);
                         _this.elements.push(imported);
                     });
-
                     if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'properties')) {
                         json.properties = null;
                         _this.printWarningBasicContainer("properties");
@@ -120,14 +118,13 @@ var CanvasBag;
                     console.log("ERROR: " + " must be defined. Object is loaded from JSON.");
                 };
                 this.id = CanvasBag.Guid.generate();
-                this.type = 0 /* BASIC */;
+                this.type = CanvasBag.ContainerType.BASIC;
                 this.elements = [];
                 this.properties = null;
             }
             return Basic;
         })();
         Container.Basic = Basic;
-    })(CanvasBag.Container || (CanvasBag.Container = {}));
-    var Container = CanvasBag.Container;
+    })(Container = CanvasBag.Container || (CanvasBag.Container = {}));
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=Container.js.map

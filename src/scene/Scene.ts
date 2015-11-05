@@ -13,7 +13,7 @@
 ///<reference path="./SceneType" />
 
 module CanvasBag {
-    module Scene {
+    export module Scene {
         export class Basic {
             private id;
             private type: SceneType;
@@ -56,26 +56,31 @@ module CanvasBag {
                 return this.valid;
             };
 
-            private addNode = (node) => {
+            public addNode = (node) => {
                 this.nodes.push(node);
                 this.invalidateScene();
+                return this;
             };
 
             public addShape = (shape) => {
                 this.addNode(shape);
+                return this;
             };
 
             public addContainer = (container) => {
                 this.addNode(container);
+                return this;
             };
 
             public addSprite = (sprite) => {
                 this.addNode(sprite);
+                return this;
             };
 
             public addConnection = (connection) => {
                 this.connections.push(connection);
                 this.invalidateScene();
+                return this;
             };
 
             public removeConnectionById = (connectionId) => {

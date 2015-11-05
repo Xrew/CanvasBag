@@ -13,6 +13,15 @@ module.exports = function (grunt) {
                     declaration: false,
                     removeComments: true
                 }
+            },
+        },
+
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: ['**/*.js'], cwd: "src-samples", dest: 'dist-samples'},
+                    {src: ['dist/bundle.js'], dest: 'dist-samples/bundle.js'}
+                ]
             }
         },
 
@@ -20,8 +29,8 @@ module.exports = function (grunt) {
             dev: {
                 expand: true,
                 src: "**/*.jade",
-                dest: "dist/",
-                cwd: "src",
+                dest: "dist-samples/",
+                cwd: "src-samples",
                 ext: '.html'
             }
         },
@@ -62,7 +71,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask("compile", ["concat:basic", "ts:dev", "jade:dev"]);
-    grunt.registerTask("compile-minified", ["concat:minified", "ts:dev", "jade:dev"]);
+    grunt.registerTask("compile", ["concat:basic", "ts:dev", "copy:main", "jade:dev"]);
+    grunt.registerTask("compile-minified", ["concat:minified", "ts:dev", "copy:main", "jade:dev"]);
 };

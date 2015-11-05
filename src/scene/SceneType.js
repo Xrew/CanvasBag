@@ -1,8 +1,11 @@
 var CanvasBag;
 (function (CanvasBag) {
-    (function (SceneType) {
-        SceneType[SceneType["BASIC"] = 0] = "BASIC";
-    })(CanvasBag.SceneType || (CanvasBag.SceneType = {}));
-    var SceneType = CanvasBag.SceneType;
+    var SceneType = (function () {
+        function SceneType() {
+        }
+        SceneType.BASIC = "BASIC";
+        return SceneType;
+    })();
+    CanvasBag.SceneType = SceneType;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=SceneType.js.map

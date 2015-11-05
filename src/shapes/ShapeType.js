@@ -1,12 +1,15 @@
 var CanvasBag;
 (function (CanvasBag) {
-    (function (ShapeType) {
-        ShapeType[ShapeType["RECTANGLE"] = 0] = "RECTANGLE";
-        ShapeType[ShapeType["TRIANGLE"] = 1] = "TRIANGLE";
-        ShapeType[ShapeType["CIRCLE"] = 2] = "CIRCLE";
-        ShapeType[ShapeType["CUSTOM_SHAPE"] = 3] = "CUSTOM_SHAPE";
-        ShapeType[ShapeType["COMPLEX_SHAPE"] = 4] = "COMPLEX_SHAPE";
-    })(CanvasBag.ShapeType || (CanvasBag.ShapeType = {}));
-    var ShapeType = CanvasBag.ShapeType;
+    var ShapeType = (function () {
+        function ShapeType() {
+        }
+        ShapeType.RECTANGLE = "RECTANGLE";
+        ShapeType.TRIANGLE = "TRIANGLE";
+        ShapeType.CIRCLE = "CIRCLE";
+        ShapeType.CUSTOM_SHAPE = "CUSTOM_SHAPE";
+        ShapeType.COMPLEX_SHAPE = "COMPLEX_SHAPE";
+        return ShapeType;
+    })();
+    CanvasBag.ShapeType = ShapeType;
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=ShapeType.js.map

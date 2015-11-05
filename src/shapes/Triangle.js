@@ -2,14 +2,14 @@
 ///<reference path="./BasicShapePrototype" />
 ///<reference path="./BasicShape" />
 ///<reference path="../utils/PolygonUtils" />
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var CanvasBag;
 (function (CanvasBag) {
+    var BasicShapes;
     (function (BasicShapes) {
         var Triangle = (function (_super) {
             __extends(Triangle, _super);
@@ -26,12 +26,11 @@ var CanvasBag;
                         properties.points[i].y += offsetY;
                     }
                 };
-                this.setType(1 /* TRIANGLE */);
+                this.setType(CanvasBag.ShapeType.TRIANGLE);
             }
             return Triangle;
         })(CanvasBag.BasicShapePrototype);
         BasicShapes.Triangle = Triangle;
-    })(CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
-    var BasicShapes = CanvasBag.BasicShapes;
+    })(BasicShapes = CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
 })(CanvasBag || (CanvasBag = {}));
 //# sourceMappingURL=Triangle.js.map

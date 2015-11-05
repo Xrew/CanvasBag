@@ -55,25 +55,21 @@ var CanvasBag;
                 }
                 _this.id = json.id;
                 _this.type = json.type;
-
                 if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'renderOffset')) {
                     json.renderOffset = { x: 0, y: 0 };
                     _this.printWarningBasicShape("renderOffset");
                 }
                 _this.renderOffset = json.renderOffset;
-
                 if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'properties')) {
                     json.properties = {};
                     _this.printErrorBasicShape("properties");
                 }
                 _this.properties = json.properties;
-
                 if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'onClickCallback')) {
                     json.onClickCallback = null;
                     _this.printWarningBasicShape("onClickCallback");
                 }
                 _this.onClickCallback = json.onClickCallback;
-
                 return _this;
             };
             this.printWarningBasicShape = function (msg) {

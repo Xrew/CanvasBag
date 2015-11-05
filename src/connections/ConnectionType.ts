@@ -1,5 +1,5 @@
 module CanvasBag {
-    export  enum ConnectionType {
-        SIMPLE
+    export class ConnectionType {
+        public static SIMPLE = "SIMPLE"
     }
 }

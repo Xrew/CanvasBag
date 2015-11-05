@@ -1,5 +1,5 @@
 module CanvasBag {
-    export  enum ContainerType {
-        BASIC
+    export class ContainerType {
+        public static BASIC = "BASIC"
     }
 }

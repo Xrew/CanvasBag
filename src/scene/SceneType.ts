@@ -1,5 +1,5 @@
 module CanvasBag {
-    export  enum SceneType {
-        BASIC
+    export class SceneType {
+        public static BASIC = "BASIC"
     }
 }

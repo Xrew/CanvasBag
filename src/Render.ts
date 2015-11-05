@@ -6,7 +6,7 @@
 ///<reference path="./connections/SimpleConnection" />
 
 module CanvasBag {
-    class Render {
+    export class Render {
         private static RENDERING_INTERVAL = 40;
         private context: CanvasRenderingContext2D;
         private canvas;
@@ -68,11 +68,11 @@ module CanvasBag {
                 }
 
                 var nodes = this.scene.getAllNodes();
-                nodes.forEach(function (node) {
+                nodes.forEach((node) => {
                     this.renderNode(node);
                 });
                 var connections = this.scene.getAllConnections();
-                connections.forEach(function (connection) {
+                connections.forEach((connection) => {
                     this.renderConnection(connection);
                 });
 
