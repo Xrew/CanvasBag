@@ -376,6 +376,7 @@ var CanvasBag;
             this.detectElement = function (point) {
                 var nodes = _this.scene.getAllNodes();
                 var sprites = _this.scene.getAllSprites();
+                // TODO should we search in sprites too? Should be sprites draggable?
                 var elements = nodes.concat(sprites);
                 var highestIndex = -1;
                 for (var i = 0; i < elements.length; i++) {
@@ -389,6 +390,7 @@ var CanvasBag;
                 return null;
             };
             this.initCanvasBehaviour = function () {
+                // Prevent selection of text in canvas
                 _this.canvas.addEventListener('selectstart', function (e) {
                     e.preventDefault();
                     return false;
@@ -443,6 +445,7 @@ var CanvasBag;
                 });
                 _this.canvas.addEventListener('mouseup', function (e) {
                     if (_this.draggingElement !== null) {
+                        // To prevent click listener when ending dragging
                         setTimeout(function () {
                             this.isDragging = false;
                         }, 0);
@@ -459,6 +462,7 @@ var CanvasBag;
                         if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {
                             if (_this.newConnection != null) {
                                 _this.newConnection.setBindings({ entry: _this.joiningElementStart, end: joiningShapeEnd });
+                                // To prevent click listener when ending dragging
                                 setTimeout(function () {
                                     this.isJoining = false;
                                 }, 0);
@@ -479,6 +483,7 @@ var CanvasBag;
                 var offsetX = 0;
                 var offsetY = 0;
                 var mx, my;
+                // Compute the total offset
                 if (element.offsetParent !== undefined) {
                     do {
                         offsetX += element.offsetLeft;
@@ -487,6 +492,7 @@ var CanvasBag;
                 }
                 mx = e.pageX - offsetX;
                 my = e.pageY - offsetY;
+                // We return a simple javascript object (a hash) with x and y defined
                 return { x: mx, y: my };
             };
             window.setInterval(this.render, Render.RENDERING_INTERVAL);
@@ -1240,4 +1246,5 @@ var CanvasBag;
         Scene.Basic = Basic;
     })(Scene = CanvasBag.Scene || (CanvasBag.Scene = {}));
 })(CanvasBag || (CanvasBag = {}));
+
 //# sourceMappingURL=bundle.js.map
