@@ -3,11 +3,11 @@ var CanvasBag;
     var ShapeType = (function () {
         function ShapeType() {
         }
-        ShapeType.RECTANGLE = "RECTANGLE";
-        ShapeType.TRIANGLE = "TRIANGLE";
-        ShapeType.CIRCLE = "CIRCLE";
-        ShapeType.CUSTOM_SHAPE = "CUSTOM_SHAPE";
-        ShapeType.COMPLEX_SHAPE = "COMPLEX_SHAPE";
+        ShapeType.RECTANGLE = "SHAPE_RECTANGLE";
+        ShapeType.TRIANGLE = "SHAPE_TRIANGLE";
+        ShapeType.CIRCLE = "SHAPE_CIRCLE";
+        ShapeType.CUSTOM_SHAPE = "SHAPE_CUSTOM_SHAPE";
+        ShapeType.COMPLEX_SHAPE = "SHAPE_COMPLEX_SHAPE";
         return ShapeType;
     })();
     CanvasBag.ShapeType = ShapeType;

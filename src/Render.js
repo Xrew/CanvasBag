@@ -235,6 +235,9 @@ var CanvasBag;
                 }
                 return null;
             };
+            this.isBasicContainer = function (element) {
+                return element !== null && element.getType() == CanvasBag.ContainerType.BASIC;
+            };
             this.initCanvasBehaviour = function () {
                 // Prevent selection of text in canvas
                 _this.canvas.addEventListener('selectstart', function (e) {
@@ -253,19 +256,22 @@ var CanvasBag;
                 _this.canvas.addEventListener('mousedown', function (e) {
                     var mousePosition = _this.getMousePosition(e);
                     var element = _this.detectElement(mousePosition);
-                    var innerContainerElement = null;
-                    if (element !== null && element.getType() == CanvasBag.ContainerType.BASIC) {
-                        innerContainerElement = element.detectInnerElement(mousePosition);
+                    var hotElement = null;
+                    if (element == null) {
+                        return;
                     }
-                    if (element !== null
-                        && ((innerContainerElement !== null && innerContainerElement.isDraggable()) || (element.isDraggable()))) {
+                    if (_this.isBasicContainer(element)) {
+                        hotElement = element.detectInnerElement(mousePosition);
+                    }
+                    else {
+                        hotElement = element;
+                    }
+                    if (hotElement.isDraggable()) {
                         _this.draggingElement = element;
                         _this.draggingMousePositionPrevious = mousePosition;
                     }
-                    else if (element !== null
-                        && innerContainerElement !== null
-                        && innerContainerElement.isJoinAble()) {
-                        _this.joiningElementStart = innerContainerElement;
+                    else if (hotElement.isJoinAble()) {
+                        _this.joiningElementStart = hotElement;
                         _this.newConnection = new CanvasBag.Connections.SimpleConnection();
                         _this.newConnection.setBindings({ entry: _this.joiningElementStart, end: null });
                         _this.newConnection.setTemporaryEnd(mousePosition);
@@ -302,8 +308,8 @@ var CanvasBag;
                     else if (_this.joiningElementStart !== null) {
                         var mousePosition = _this.getMousePosition(e);
                         var joiningShapeEnd = _this.detectElement(mousePosition);
-                        if (joiningShapeEnd != null && joiningShapeEnd.getType() == CanvasBag.ContainerType.BASIC) {
-                            joiningShapeEnd = joiningShapeEnd.detectInnerShape(mousePosition);
+                        if (_this.isBasicContainer(joiningShapeEnd)) {
+                            joiningShapeEnd = joiningShapeEnd.detectInnerElement(mousePosition);
                         }
                         if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {
                             if (_this.newConnection != null) {

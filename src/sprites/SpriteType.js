@@ -3,8 +3,8 @@ var CanvasBag;
     var SpriteType = (function () {
         function SpriteType() {
         }
-        SpriteType.IMAGE = "IMAGE";
-        SpriteType.TEXT = "TEXT";
+        SpriteType.IMAGE = "SPRITE_IMAGE";
+        SpriteType.TEXT = "SPRITE_TEXT";
         return SpriteType;
     })();
     CanvasBag.SpriteType = SpriteType;

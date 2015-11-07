@@ -1,9 +1,9 @@
 module CanvasBag {
     export  class ShapeType {
-        public static RECTANGLE = "RECTANGLE";
-        public static TRIANGLE = "TRIANGLE";
-        public static CIRCLE = "CIRCLE";
-        public static CUSTOM_SHAPE = "CUSTOM_SHAPE";
-        public static COMPLEX_SHAPE = "COMPLEX_SHAPE";
+        public static RECTANGLE = "SHAPE_RECTANGLE";
+        public static TRIANGLE = "SHAPE_TRIANGLE";
+        public static CIRCLE = "SHAPE_CIRCLE";
+        public static CUSTOM_SHAPE = "SHAPE_CUSTOM_SHAPE";
+        public static COMPLEX_SHAPE = "SHAPE_COMPLEX_SHAPE";
     }
 }

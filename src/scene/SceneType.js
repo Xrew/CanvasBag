@@ -3,7 +3,7 @@ var CanvasBag;
     var SceneType = (function () {
         function SceneType() {
         }
-        SceneType.BASIC = "BASIC";
+        SceneType.BASIC = "SCENE_BASIC";
         return SceneType;
     })();
     CanvasBag.SceneType = SceneType;

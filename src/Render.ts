@@ -318,6 +318,11 @@ module CanvasBag {
             return null;
         };
 
+
+        private isBasicContainer = (element): boolean => {
+            return element !== null && element.getType() == CanvasBag.ContainerType.BASIC;
+        }
+
         private initCanvasBehaviour = () => {
             // Prevent selection of text in canvas
             this.canvas.addEventListener('selectstart', (e) => {
@@ -335,23 +340,27 @@ module CanvasBag {
                 }
             });
 
+
             this.canvas.addEventListener('mousedown', (e) => {
                 var mousePosition = this.getMousePosition(e);
                 var element = this.detectElement(mousePosition);
-                var innerContainerElement = null;
-                if (element !== null && element.getType() == CanvasBag.ContainerType.BASIC) {
-                    innerContainerElement = element.detectInnerElement(mousePosition)
+                var hotElement = null;
+
+                if(element == null) {
+                    return;
                 }
 
+                if (this.isBasicContainer(element)) {
+                    hotElement = element.detectInnerElement(mousePosition)
+                } else {
+                    hotElement = element;
+                }
 
-                if (element !== null
-                    && ((innerContainerElement !== null && innerContainerElement.isDraggable()) || (element.isDraggable()))) {
+                if (hotElement.isDraggable()) {
                     this.draggingElement = element;
                     this.draggingMousePositionPrevious = mousePosition;
-                } else if (element !== null
-                    && innerContainerElement !== null
-                    && innerContainerElement.isJoinAble()) {
-                    this.joiningElementStart = innerContainerElement;
+                } else if (hotElement.isJoinAble()) {
+                    this.joiningElementStart = hotElement;
                     this.newConnection = new Connections.SimpleConnection();
                     this.newConnection.setBindings({entry: this.joiningElementStart, end: null});
                     this.newConnection.setTemporaryEnd(mousePosition);
@@ -389,8 +398,8 @@ module CanvasBag {
                 } else if (this.joiningElementStart !== null) {
                     var mousePosition = this.getMousePosition(e);
                     var joiningShapeEnd = this.detectElement(mousePosition);
-                    if (joiningShapeEnd != null && joiningShapeEnd.getType() == ContainerType.BASIC) {
-                        joiningShapeEnd = joiningShapeEnd.detectInnerShape(mousePosition);
+                    if (this.isBasicContainer(joiningShapeEnd)) {
+                        joiningShapeEnd = joiningShapeEnd.detectInnerElement(mousePosition);
                     }
                     if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {
                         if (this.newConnection != null) {
