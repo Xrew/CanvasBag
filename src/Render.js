@@ -299,7 +299,7 @@ var CanvasBag;
                     if (_this.draggingElement !== null) {
                         // To prevent click listener when ending dragging
                         setTimeout(function () {
-                            this.isDragging = false;
+                            _this.isDragging = false;
                         }, 0);
                         _this.draggingElement = null;
                         _this.draggingMousePositionPrevious = null;
@@ -316,7 +316,7 @@ var CanvasBag;
                                 _this.newConnection.setBindings({ entry: _this.joiningElementStart, end: joiningShapeEnd });
                                 // To prevent click listener when ending dragging
                                 setTimeout(function () {
-                                    this.isJoining = false;
+                                    _this.isJoining = false;
                                 }, 0);
                                 _this.joiningElementStart = null;
                             }

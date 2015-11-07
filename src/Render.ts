@@ -389,7 +389,7 @@ module CanvasBag {
             this.canvas.addEventListener('mouseup', (e) => {
                 if (this.draggingElement !== null) {
                     // To prevent click listener when ending dragging
-                    setTimeout(function () {
+                    setTimeout(() => {
                         this.isDragging = false;
                     }, 0);
                     this.draggingElement = null;
@@ -405,7 +405,7 @@ module CanvasBag {
                         if (this.newConnection != null) {
                             this.newConnection.setBindings({entry: this.joiningElementStart, end: joiningShapeEnd})
                             // To prevent click listener when ending dragging
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 this.isJoining = false;
                             }, 0);
                             this.joiningElementStart = null;

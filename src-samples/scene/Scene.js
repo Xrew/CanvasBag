@@ -1,9 +1,9 @@
 window.onload = function () {
     var canvas = document.getElementById("scene");
-    var render = CanvasBag.Render;
+    var render = new CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = CanvasBag.Scene();
+    var scene = new  CanvasBag.Scene.Basic();
     render.addScene(scene);
 
     var rectangle = new CanvasBag.BasicShapes.Rectangle();
@@ -37,7 +37,7 @@ window.onload = function () {
         draggable: false
     });
 
-    var containerBasic = CanvasBag.Container.Basic();
+    var containerBasic = new  CanvasBag.Container.Basic();
     containerBasic.setProperties({
         name: "containerBasic1",
         position: {x: 200, y: 100}

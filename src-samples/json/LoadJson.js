@@ -80,10 +80,10 @@ var jsonDefinition = {
 
 window.onload = function () {
     var canvas = document.getElementById("LoadJson");
-    var render = CanvasBag.Render;
+    var render = new  CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = CanvasBag.Scene();
+    var scene = new CanvasBag.Scene.Basic();
     render.addScene(scene);
 
     scene.fromJSON(jsonDefinition);

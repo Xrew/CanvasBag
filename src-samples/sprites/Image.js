@@ -1,9 +1,9 @@
 window.onload = function () {
     var canvas = document.getElementById("image");
-    var render = CanvasBag.Render;
+    var render = new CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = CanvasBag.Scene();
+    var scene = new CanvasBag.Scene.Basic();
     render.addScene(scene);
 
 
@@ -20,7 +20,7 @@ window.onload = function () {
 
     scene.addSprite(image);
 
-    setInterval(function() {
+    setInterval(function () {
         document.getElementById("sceneJSON").innerHTML = JSON.stringify(scene, undefined, 2);
     }, 100);
 
