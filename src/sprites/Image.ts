@@ -1,6 +1,6 @@
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
-///<reference path="./BasicSprite" />
+///<reference path="../render/Node.ts" />
 
 module CanvasBag {
     export module Sprites {
@@ -10,22 +10,22 @@ module CanvasBag {
             height: number;
         }
 
-        export class Image extends BasicSpritePrototype implements BasicSprite {
+        export class Image extends BasicSpritePrototype {
 
             constructor() {
                 super();
                 this.setType(SpriteType.IMAGE)
             }
 
-            public setProperties = (properties:ImageSpriteProperties) => {
+            setProperties(properties:ImageSpriteProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public getProperties = ():ImageSpriteProperties => {
+            getProperties():ImageSpriteProperties {
                 return <ImageSpriteProperties>this.getBaseProperties();
             };
 
-            public contains = (point):boolean => {
+            contains(point):boolean {
                 var properties = <ImageSpriteProperties>this.getBaseProperties();
                 var renderOffset = this.getRenderOffset();
 
@@ -37,11 +37,15 @@ module CanvasBag {
                 return (centerX - offsetX <= point.x && centerX + offsetX >= point.x && centerY + offsetY >= point.y && centerY - offsetY <= point.y);
             };
 
-            public  move = (offsetX, offsetY) => {
+            move(offsetX, offsetY) {
                 var properties = <ImageSpriteProperties>this.getProperties();
 
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
+            };
+
+            public setBackgroundImage = (imageData:string) => {
+                (<ImageSpriteProperties>this.getBaseProperties()).imageData = imageData;
             };
         }
     }

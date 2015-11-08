@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="../render/Node.ts" />
 ///<reference path="../utils/PolygonUtils" />
 
 module CanvasBag {
@@ -10,25 +10,25 @@ module CanvasBag {
         }
 
 
-        export class Triangle extends BasicShapePrototype implements BasicShape {
+        export class Triangle extends BasicShapePrototype {
             constructor() {
                 super();
                 this.setType(ShapeType.TRIANGLE)
             }
 
-            public setProperties = (properties:TriangleShapeProperties) => {
+            setProperties(properties:TriangleShapeProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public getProperties = ():TriangleShapeProperties => {
+            getProperties():TriangleShapeProperties {
                 return <TriangleShapeProperties>this.getBaseProperties();
             };
 
-            public contains = (point):boolean => {
+            contains(point):boolean {
                 return PolygonUtils.pointInPolygon(point, PolygonUtils.addOffsetToPoints(this.getProperties().points, this.getRenderOffset()))
             };
 
-            public  move = (offsetX, offsetY) => {
+            move(offsetX, offsetY) {
                 var properties = <TriangleShapeProperties>this.getProperties();
                 for (var i = 0; i < properties.points.length; i++) {
                     properties.points[i].x += offsetX;

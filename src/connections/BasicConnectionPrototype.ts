@@ -2,6 +2,7 @@
 ///<reference path="./ConnectionType" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../render/base/Color.ts" />
+///<reference path="../render/Node.ts" />
 
 
 module CanvasBag {
@@ -21,8 +22,8 @@ module CanvasBag {
         end:Point;
     }
 
-    export class BasicConnectionPrototype {
-        private id:string;
+    export abstract class BasicConnectionPrototype implements CanvasBag.Node{
+        public id:string;
         private type:ConnectionType;
         private properties:BasicConnectionProperties;
         private onClickCallback:() => void;
@@ -37,6 +38,11 @@ module CanvasBag {
             this.bindings = {entry: null, end: null};
             this.temporaryEnd = null;
         }
+
+        public abstract getProperties():BasicConnectionProperties;
+        public abstract setProperties(properties: BasicConnectionProperties);
+        public abstract contains(point: Point) : boolean;
+        public abstract move(offsetX: number, offsetY: number);
 
         public getId = () => {
             return this.id;

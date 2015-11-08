@@ -1,5 +1,4 @@
 ///<reference path="../render/Point" />
-///<reference path="./ContainerType" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../sprites/Image" />
@@ -9,12 +8,14 @@
 ///<reference path="../shapes/Custom" />
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
+///<reference path="ContainerType.ts" />
+///<reference path="SimpleContainer.ts" />
 var CanvasBag;
 (function (CanvasBag) {
-    var Container;
-    (function (Container) {
-        var Basic = (function () {
-            function Basic() {
+    var BasicContainer;
+    (function (BasicContainer) {
+        var BasicContainerPrototype = (function () {
+            function BasicContainerPrototype() {
                 var _this = this;
                 this.getType = function () {
                     return _this.type;
@@ -22,14 +23,11 @@ var CanvasBag;
                 this.getId = function () {
                     return _this.id;
                 };
-                this.setProperties = function (properties) {
+                this.setBaseProperties = function (properties) {
                     _this.properties = properties;
                 };
-                this.getProperties = function () {
+                this.getBaseProperties = function () {
                     return _this.properties;
-                };
-                this.contains = function (point) {
-                    return _this.detectInnerElement(point) !== null;
                 };
                 this.detectInnerElement = function (point) {
                     for (var i = 0; i < _this.elements.length; i++) {
@@ -38,10 +36,6 @@ var CanvasBag;
                         }
                     }
                     return null;
-                };
-                this.move = function (offsetX, offsetY) {
-                    _this.properties.position.x += offsetX;
-                    _this.properties.position.y += offsetY;
                 };
                 this.addElement = function (element) {
                     _this.elements.push(element);
@@ -89,7 +83,7 @@ var CanvasBag;
                                 imported = new CanvasBag.BasicShapes.Custom();
                                 break;
                             case CanvasBag.ContainerType.BASIC:
-                                imported = new Container.Basic();
+                                imported = new BasicContainer.SimpleContainer();
                                 break;
                             case CanvasBag.SpriteType.IMAGE:
                                 imported = new CanvasBag.Sprites.Image();
@@ -118,13 +112,16 @@ var CanvasBag;
                     console.log("ERROR: " + " must be defined. Object is loaded from JSON.");
                 };
                 this.id = CanvasBag.Guid.generate();
-                this.type = CanvasBag.ContainerType.BASIC;
+                this.type = null;
                 this.elements = [];
                 this.properties = null;
             }
-            return Basic;
+            BasicContainerPrototype.prototype.setType = function (type) {
+                this.type = type;
+            };
+            return BasicContainerPrototype;
         })();
-        Container.Basic = Basic;
-    })(Container = CanvasBag.Container || (CanvasBag.Container = {}));
+        BasicContainer.BasicContainerPrototype = BasicContainerPrototype;
+    })(BasicContainer = CanvasBag.BasicContainer || (CanvasBag.BasicContainer = {}));
 })(CanvasBag || (CanvasBag = {}));
-//# sourceMappingURL=Container.js.map
+//# sourceMappingURL=BasicContainerPrototype.js.map

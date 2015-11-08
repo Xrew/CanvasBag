@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="../render/Node.ts" />
 ///<reference path="../utils/PolygonUtils" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -14,26 +14,29 @@ var CanvasBag;
         var Custom = (function (_super) {
             __extends(Custom, _super);
             function Custom() {
-                var _this = this;
                 _super.call(this);
-                this.setProperties = function (properties) {
-                    _this.setBaseProperties(properties);
-                };
-                this.getProperties = function () {
-                    return _this.getBaseProperties();
-                };
-                this.contains = function (point) {
-                    return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getBaseProperties().points, _this.getRenderOffset()));
-                };
-                this.move = function (offsetX, offsetY) {
-                    var properties = _this.getBaseProperties();
-                    for (var i = 0; i < properties.points.length; i++) {
-                        properties.points[i].x += offsetX;
-                        properties.points[i].y += offsetY;
-                    }
-                };
                 this.setType(CanvasBag.ShapeType.CUSTOM_SHAPE);
             }
+            Custom.prototype.setProperties = function (properties) {
+                this.setBaseProperties(properties);
+            };
+            ;
+            Custom.prototype.getProperties = function () {
+                return this.getBaseProperties();
+            };
+            ;
+            Custom.prototype.contains = function (point) {
+                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(this.getBaseProperties().points, this.getRenderOffset()));
+            };
+            ;
+            Custom.prototype.move = function (offsetX, offsetY) {
+                var properties = this.getBaseProperties();
+                for (var i = 0; i < properties.points.length; i++) {
+                    properties.points[i].x += offsetX;
+                    properties.points[i].y += offsetY;
+                }
+            };
+            ;
             return Custom;
         })(CanvasBag.BasicShapePrototype);
         BasicShapes.Custom = Custom;

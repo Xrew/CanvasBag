@@ -3,6 +3,7 @@
 ///<reference path="SpriteType.ts" />
 ///<reference path="../render/Point.ts" />
 ///<reference path="../render/RenderOffset.ts" />
+///<reference path="../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicSpritePrototype = (function () {
@@ -40,9 +41,6 @@ var CanvasBag;
             };
             this.setDraggable = function (able) {
                 _this.properties.draggable = able;
-            };
-            this.setBackgroundImage = function (imageData) {
-                _this.properties.imageData = imageData;
             };
             this.toJSON = function () {
                 return {

@@ -3,6 +3,7 @@
 ///<reference path="SpriteType.ts" />
 ///<reference path="../render/Point.ts" />
 ///<reference path="../render/RenderOffset.ts" />
+///<reference path="../render/Node.ts" />
 
 module CanvasBag {
     export interface BasicSpriteProperties {
@@ -10,9 +11,9 @@ module CanvasBag {
         draggable: boolean;
     }
 
-    export class BasicSpritePrototype {
+    export abstract class BasicSpritePrototype implements CanvasBag.Node {
         private type:SpriteType;
-        private id:string;
+        public id:string;
         private renderOffset:RenderOffset;
         private onClickCallback:()=> void;
         private properties:BasicSpriteProperties;
@@ -25,6 +26,10 @@ module CanvasBag {
             this.properties = null;
         }
 
+        public abstract getProperties():BasicSpriteProperties;
+        public abstract setProperties(properties: BasicSpriteProperties);
+        public abstract contains(point: Point) : boolean;
+        public abstract move(offsetX: number, offsetY: number);
 
         public  getId = ():string => {
             return this.id;
@@ -68,10 +73,6 @@ module CanvasBag {
 
         public setDraggable = (able:boolean) => {
             this.properties.draggable = able;
-        };
-
-        public setBackgroundImage = (imageData:string) => {
-            this.properties.imageData = imageData;
         };
 
         public toJSON = ():any => {

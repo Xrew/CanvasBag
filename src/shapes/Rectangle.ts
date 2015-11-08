@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="../render/Node.ts" />
 
 module CanvasBag {
     export module BasicShapes {
@@ -8,21 +8,21 @@ module CanvasBag {
         }
 
 
-        export class Rectangle extends BasicShapePrototype implements BasicShape {
+        export class Rectangle extends BasicShapePrototype {
             constructor() {
                 super();
                 this.setType(ShapeType.RECTANGLE)
             }
 
-            public setProperties = (properties:RectangleShapeProperties) => {
+            setProperties(properties:RectangleShapeProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public getProperties = ():RectangleShapeProperties => {
+            getProperties():RectangleShapeProperties {
                 return <BasicShapeProperties>this.getBaseProperties();
             };
 
-            public contains = (point):boolean => {
+            contains(point):boolean {
                 var properties = <RectangleShapeProperties>this.getBaseProperties();
                 var renderOffset = this.getRenderOffset();
 
@@ -34,7 +34,7 @@ module CanvasBag {
                 return (centerX - offsetX <= point.x && centerX + offsetX >= point.x && centerY + offsetY >= point.y && centerY - offsetY <= point.y);
             };
 
-            public  move = (offsetX, offsetY) => {
+            move(offsetX, offsetY) {
                 var properties = <RectangleShapeProperties>this.getBaseProperties();
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;

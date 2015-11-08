@@ -4,6 +4,7 @@
 ///<reference path="../render/RenderOffset.ts" />
 ///<reference path="../render/base/Color.ts" />
 ///<reference path="../render/Point.ts" />
+///<reference path="../render/Node.ts" />
 
 module CanvasBag {
     export interface BasicShapeProperties {
@@ -17,12 +18,17 @@ module CanvasBag {
         base64Background: string;
     }
 
-    export class BasicShapePrototype {
+    export abstract class BasicShapePrototype implements CanvasBag.Node {
         private type: ShapeType;
-        private id: string;
+        public id: string;
         private renderOffset: RenderOffset;
         private onClickCallback: () => void;
         private properties: BasicShapeProperties;
+
+        public abstract getProperties():BasicShapeProperties;
+        public abstract setProperties(properties: BasicShapeProperties);
+        public abstract contains(point: Point) : boolean;
+        public abstract move(offsetX: number, offsetY: number);
 
         constructor() {
             this.id = Guid.generate();

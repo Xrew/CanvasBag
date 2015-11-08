@@ -5,24 +5,26 @@
 ///<reference path="./connections/ConnectionType" />
 ///<reference path="./connections/SimpleConnection" />
 ///<reference path="sprites/Text.ts" />
+///<reference path="scene/Scene.ts" />
+///<reference path="containers/BasicContainerPrototype.ts" />
 
 module CanvasBag {
     export class Render {
         private static RENDERING_INTERVAL = 40;
         private context:CanvasRenderingContext2D;
-        private canvas;
-        private scene;
-        private canvasValid;
+        private canvas: HTMLCanvasElement;
+        private scene: CanvasBag.Scene.Basic;
+        private canvasValid: boolean;
 
         // Keep track when we are dragging
-        private isDragging;
-        private draggingElement;
-        private draggingMousePositionPrevious;
+        private isDragging: boolean;
+        private draggingElement: CanvasBag.Node;
+        private draggingMousePositionPrevious: Point;
 
         // Keep track when we are joining
-        private isJoining;
-        private joiningElementStart;
-        private joiningMousePosition;
+        private isJoining:boolean;
+        private joiningElementStart: CanvasBag.Node;
+        private joiningMousePosition: Point;
         private newConnection = null;
 
         constructor() {
@@ -110,7 +112,7 @@ module CanvasBag {
             this.context.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
         };
 
-        private  renderImage = (image:Canvas.Sprites.Image) => {
+        private  renderImage = (image:CanvasBag.Sprites.Image) => {
             var properties = image.getProperties();
             var renderOffset = image.getRenderOffset();
             var halfWidth = properties.width / 2;
@@ -241,28 +243,28 @@ module CanvasBag {
             this.context.stroke();
         };
 
-        private renderNode = (node) => {
+        private renderNode = (node:any) => {
             switch (node.getType()) {
                 case ShapeType.RECTANGLE:
-                    this.renderRectangle(node);
+                    this.renderRectangle(<CanvasBag.BasicShapes.Rectangle>node);
                     break;
                 case ShapeType.CIRCLE:
-                    this.renderCircle(node);
+                    this.renderCircle(<CanvasBag.BasicShapes.Circle>node);
                     break;
                 case ShapeType.TRIANGLE:
-                    this.renderTriangle(node);
+                    this.renderTriangle(<CanvasBag.BasicShapes.Triangle>node);
                     break;
                 case ShapeType.CUSTOM_SHAPE:
-                    this.renderCustomShape(node);
+                    this.renderCustomShape(<CanvasBag.BasicShapes.Custom>node);
                     break;
                 case ContainerType.BASIC:
-                    this.renderContainerBasic(node);
+                    this.renderContainerBasic(<CanvasBag.BasicContainer.SimpleContainer>node);
                     break;
                 case SpriteType.IMAGE:
-                    this.renderImage(node);
+                    this.renderImage(<CanvasBag.Sprites.Image>node);
                     break;
                 case SpriteType.TEXT:
-                    this.renderText(node);
+                    this.renderText(<CanvasBag.Sprites.Text>node);
                     break;
                 default:
                     console.log("Unknown shape " + node.getType() + ". Cannot render.");
@@ -299,12 +301,12 @@ module CanvasBag {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         };
 
-        private detectElement = (point) => {
+        private detectElement = (point) : CanvasBag.Node => {
             var nodes = this.scene.getAllNodes();
             var sprites = this.scene.getAllSprites();
 
             // TODO should we search in sprites too? Should be sprites draggable?
-            var elements = nodes.concat(sprites);
+            var elements = nodes.concat(<Array<CanvasBag.Node>>sprites);
 
             var highestIndex = -1;
             for (var i = 0; i < elements.length; i++) {
@@ -352,7 +354,7 @@ module CanvasBag {
                 }
 
                 if (this.isBasicContainer(element)) {
-                    hotElement = element.detectInnerElement(mousePosition)
+                    hotElement = (<BasicContainer.BasicContainerPrototype>element).detectInnerElement(mousePosition)
                 } else {
                     hotElement = element;
                 }
@@ -400,7 +402,7 @@ module CanvasBag {
                     var mousePosition = this.getMousePosition(e);
                     var joiningShapeEnd = this.detectElement(mousePosition);
                     if (this.isBasicContainer(joiningShapeEnd)) {
-                        joiningShapeEnd = joiningShapeEnd.detectInnerElement(mousePosition);
+                        joiningShapeEnd =  (<BasicContainer.BasicContainerPrototype>joiningShapeEnd).detectInnerElement(mousePosition);
                     }
                     if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {
                         if (this.newConnection != null) {
@@ -433,7 +435,7 @@ module CanvasBag {
                 do {
                     offsetX += element.offsetLeft;
                     offsetY += element.offsetTop;
-                } while ((element = element.offsetParent));
+                } while ((element == element.offsetParent));
             }
 
             mx = e.pageX - offsetX;

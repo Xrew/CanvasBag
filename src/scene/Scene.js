@@ -1,6 +1,5 @@
 ///<reference path="../render/Point" />
 ///<reference path="../containers/ContainerType" />
-///<reference path="../containers/Container" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../sprites/Image" />
@@ -11,7 +10,10 @@
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
 ///<reference path="./SceneType" />
-///<reference path="../connections/BasicConnection.ts" />
+///<reference path="../render/Node" />
+///<reference path="../containers/BasicContainerPrototype.ts" />
+///<reference path="../shapes/BasicShapePrototype.ts" />
+///<reference path="../connections/BasicConnectionPrototype.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Scene;
@@ -129,7 +131,7 @@ var CanvasBag;
                                                 imported.fromJSON(node);
                                                 break;
                                             case CanvasBag.ContainerType.BASIC:
-                                                imported = new CanvasBag.Container.Basic();
+                                                imported = new CanvasBag.BasicContainer.SimpleContainer();
                                                 imported.fromJSON(node);
                                                 break;
                                             default:

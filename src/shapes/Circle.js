@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="../render/Node.ts" />
 ///<reference path="../render/Point.ts" />
 ///<reference path="BasicShapePrototype.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
@@ -15,27 +15,30 @@ var CanvasBag;
         var Circle = (function (_super) {
             __extends(Circle, _super);
             function Circle() {
-                var _this = this;
                 _super.call(this);
-                this.setProperties = function (properties) {
-                    _this.setBaseProperties(properties);
-                };
-                this.getProperties = function () {
-                    return _this.getBaseProperties();
-                };
-                this.contains = function (point) {
-                    var properties = _this.getBaseProperties();
-                    var renderOffset = _this.getRenderOffset();
-                    return Math.pow(point.x - (properties.position.x + renderOffset.x), 2) +
-                        Math.pow(point.y - (properties.position.y + renderOffset.y), 2) < Math.pow(properties.radius, 2);
-                };
-                this.move = function (offsetX, offsetY) {
-                    var properties = _this.getBaseProperties();
-                    properties.position.x += offsetX;
-                    properties.position.y += offsetY;
-                };
                 this.setType(CanvasBag.ShapeType.CIRCLE);
             }
+            Circle.prototype.setProperties = function (properties) {
+                this.setBaseProperties(properties);
+            };
+            ;
+            Circle.prototype.getProperties = function () {
+                return this.getBaseProperties();
+            };
+            ;
+            Circle.prototype.contains = function (point) {
+                var properties = this.getBaseProperties();
+                var renderOffset = this.getRenderOffset();
+                return Math.pow(point.x - (properties.position.x + renderOffset.x), 2) +
+                    Math.pow(point.y - (properties.position.y + renderOffset.y), 2) < Math.pow(properties.radius, 2);
+            };
+            ;
+            Circle.prototype.move = function (offsetX, offsetY) {
+                var properties = this.getBaseProperties();
+                properties.position.x += offsetX;
+                properties.position.y += offsetY;
+            };
+            ;
             return Circle;
         })(CanvasBag.BasicShapePrototype);
         BasicShapes.Circle = Circle;

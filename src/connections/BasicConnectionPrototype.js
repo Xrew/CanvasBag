@@ -2,6 +2,7 @@
 ///<reference path="./ConnectionType" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../render/base/Color.ts" />
+///<reference path="../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicConnectionPrototype = (function () {

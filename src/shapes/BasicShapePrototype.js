@@ -4,6 +4,7 @@
 ///<reference path="../render/RenderOffset.ts" />
 ///<reference path="../render/base/Color.ts" />
 ///<reference path="../render/Point.ts" />
+///<reference path="../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicShapePrototype = (function () {

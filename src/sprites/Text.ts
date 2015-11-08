@@ -1,6 +1,6 @@
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
-///<reference path="./BasicSprite" />
+///<reference path="../render/Node.ts" />
 ///<reference path="../render/base/Font.ts" />
 
 module CanvasBag {
@@ -14,21 +14,21 @@ module CanvasBag {
         }
 
 
-        export class Text extends BasicSpritePrototype implements BasicSprite {
+        export class Text extends BasicSpritePrototype {
             constructor() {
                 super();
                 this.setType(SpriteType.TEXT)
             }
 
-            public setProperties = (properties:TextSpriteProperties) =>  {
+            setProperties(properties:TextSpriteProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public getProperties = ():TextSpriteProperties => {
+            getProperties():TextSpriteProperties {
                 return <TextSpriteProperties>this.getBaseProperties();
             };
 
-            public contains = (point):boolean => {
+            contains(point:Point):boolean {
                 var properties = this.getProperties();
                 var renderOffset = this.getRenderOffset();
 
@@ -40,7 +40,7 @@ module CanvasBag {
                 return (centerX - offsetX <= point.x && centerX + offsetX >= point.x && centerY + offsetY >= point.y && centerY - offsetY <= point.y);
             };
 
-            public  move = (offsetX, offsetY) => {
+            move(offsetX:number, offsetY:number) {
                 var properties = this.getProperties();
 
                 properties.position.x += offsetX;

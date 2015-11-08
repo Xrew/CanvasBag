@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="./BasicShape" />
+///<reference path="../render/Node.ts" />
 ///<reference path="../utils/PolygonUtils" />
 
 module CanvasBag {
@@ -9,27 +9,27 @@ module CanvasBag {
             points: Array<Point>;
         }
 
-        export class Custom extends BasicShapePrototype implements BasicShape {
+        export class Custom extends BasicShapePrototype {
             constructor() {
                 super();
                 this.setType(ShapeType.CUSTOM_SHAPE)
             }
 
-            public setProperties = (properties: CustomShapeProperties) => {
+            setProperties(properties: CustomShapeProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public getProperties = ():CustomShapeProperties => {
+            getProperties():CustomShapeProperties{
                 return <CustomShapeProperties>this.getBaseProperties();
             };
 
-            public contains = (point):boolean => {
+            contains(point):boolean{
                 return PolygonUtils.pointInPolygon(
                     point, PolygonUtils.addOffsetToPoints((<CustomShapeProperties>this.getBaseProperties()).points, this.getRenderOffset())
                 )
             };
 
-            public  move = (offsetX, offsetY) => {
+            move(offsetX, offsetY){
                 var properties = <CustomShapeProperties> this.getBaseProperties();
                 for (var i = 0; i < properties.points.length; i++) {
                     properties.points[i].x += offsetX;

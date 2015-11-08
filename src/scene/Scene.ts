@@ -1,6 +1,5 @@
 ///<reference path="../render/Point" />
 ///<reference path="../containers/ContainerType" />
-///<reference path="../containers/Container" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../sprites/Image" />
@@ -11,16 +10,19 @@
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
 ///<reference path="./SceneType" />
-///<reference path="../connections/BasicConnection.ts" />
+///<reference path="../render/Node" />
+///<reference path="../containers/BasicContainerPrototype.ts" />
+///<reference path="../shapes/BasicShapePrototype.ts" />
+///<reference path="../connections/BasicConnectionPrototype.ts" />
 
 module CanvasBag {
     export module Scene {
         export class Basic {
-            private id: string;
-            private type: SceneType;
-            private nodes: Array<CanvasBag.Node>;
-            private connections: Array<BasicConnection>;
-            private sprites: Array<BasicSprite>;
+            private id:string;
+            private type:SceneType;
+            private nodes:Array<CanvasBag.Node>;
+            private connections:Array<BasicConnectionPrototype>;
+            private sprites:Array<BasicSpritePrototype>;
             private valid:boolean;
 
             constructor() {
@@ -33,15 +35,15 @@ module CanvasBag {
             }
 
 
-            public  getId = () => {
+            public  getId = ():string => {
                 return this.id;
             };
 
-            public getType = () => {
+            public getType = ():SceneType => {
                 return this.type;
             };
 
-            public setType = (type) => {
+            public setType = (type: SceneType) => {
                 this.type = type;
             };
 
@@ -57,34 +59,34 @@ module CanvasBag {
                 return this.valid;
             };
 
-            public addNode = (node) => {
+            public addNode = (node: CanvasBag.Node) => {
                 this.nodes.push(node);
                 this.invalidateScene();
                 return this;
             };
 
-            public addShape = (shape) => {
-                this.addNode(shape);
+            public addShape = (shape: BasicShapePrototype) => {
+                this.addNode((<CanvasBag.Node>shape));
                 return this;
             };
 
-            public addContainer = (container) => {
-                this.addNode(container);
+            public addContainer = (container: BasicContainer.BasicContainerPrototype) => {
+                this.addNode(<CanvasBag.Node>container);
                 return this;
             };
 
-            public addSprite = (sprite) => {
+            public addSprite = (sprite: BasicSpritePrototype) => {
                 this.addNode(sprite);
                 return this;
             };
 
-            public addConnection = (connection) => {
+            public addConnection = (connection: BasicConnectionPrototype) => {
                 this.connections.push(connection);
                 this.invalidateScene();
                 return this;
             };
 
-            public removeConnectionById = (connectionId) => {
+            public removeConnectionById = (connectionId: string) => {
                 for (var i = 0; i < this.connections.length; i++) {
                     if (this.connections[i].getId() == connectionId) {
                         this.connections.splice(i, 1);
@@ -93,7 +95,7 @@ module CanvasBag {
                 }
             };
 
-            public  getConnectionById = (connectionId) => {
+            public  getConnectionById = (connectionId: string) => {
                 for (var i = 0; i < this.connections.length; i++) {
                     if (this.connections[i].getId() == connectionId) {
                         return this.connections[i];
@@ -101,19 +103,19 @@ module CanvasBag {
                 }
             };
 
-            public getAllNodes = () => {
+            public getAllNodes = ():Array<CanvasBag.Node>=> {
                 return this.nodes;
             };
 
-            public getAllConnections = () => {
+            public getAllConnections = () : Array<BasicConnectionPrototype>=> {
                 return this.connections;
             };
 
-            public  getAllSprites = () => {
+            public  getAllSprites = () : Array<BasicSpritePrototype>=> {
                 return this.sprites;
             };
 
-            public getNodeById = (nodeId) => {
+            public getNodeById = (nodeId: string) => {
                 for (var i = 0; i < this.nodes.length; i++) {
                     var candidate = this.tryToFindNodeInSceneById(nodeId, this.nodes[i]);
                     if (candidate != null) {
@@ -161,7 +163,7 @@ module CanvasBag {
                                             imported.fromJSON(node);
                                             break;
                                         case ContainerType.BASIC:
-                                            imported = new Container.Basic();
+                                            imported = new BasicContainer.SimpleContainer();
                                             imported.fromJSON(node);
                                             break;
                                         default:

@@ -1,5 +1,4 @@
 ///<reference path="../render/Point" />
-///<reference path="./ContainerType" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
 ///<reference path="../sprites/Image" />
@@ -9,49 +8,57 @@
 ///<reference path="../shapes/Custom" />
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
+///<reference path="ContainerType.ts" />
+///<reference path="SimpleContainer.ts" />
 
 
 module CanvasBag {
-    export module Container {
+    export module BasicContainer {
         export interface BasicContainerProperties {
             name: string;
             position: Point;
         }
 
-        export class Basic {
-            private id;
+        export abstract class BasicContainerPrototype implements CanvasBag.Node {
+            public  id:string;
             private properties:BasicContainerProperties;
             private type:ContainerType;
-            private elements: Array<Node>;
+            private elements:Array<Node>;
 
             constructor() {
                 this.id = Guid.generate();
-                this.type = ContainerType.BASIC;
+                this.type = null;
                 this.elements = [];
                 this.properties = null
             }
 
-            public  getType = () => {
+            public abstract getProperties():BasicContainerProperties;
+            public abstract setProperties(properties: BasicContainerProperties);
+            public abstract contains(point: Point) : boolean;
+            public abstract move(offsetX: number, offsetY: number);
+
+            public setType(type:ContainerType) {
+                this.type = type;
+            }
+
+            public  getType = ():ContainerType=> {
                 return this.type;
             };
 
-            public  getId = () => {
+            public  getId = ():string => {
                 return this.id;
             };
 
-            public setProperties = (properties:BasicContainerProperties) => {
+            public setBaseProperties = (properties:BasicContainerProperties) => {
                 this.properties = properties;
             };
 
-            public getProperties = ():BasicContainerProperties => {
+            public getBaseProperties = ():BasicContainerProperties => {
                 return this.properties;
             };
 
-            public contains = (point:Point):boolean => {
-                return this.detectInnerElement(point) !== null;
-            };
 
-            private detectInnerElement = (point:Point)  => {
+            public detectInnerElement = (point:Point)  => {
                 for (var i = 0; i < this.elements.length; i++) {
                     if (this.elements[i].contains(point)) {
                         return this.elements[i];
@@ -60,17 +67,14 @@ module CanvasBag {
                 return null;
             };
 
-            public move = (offsetX:number, offsetY:number) => {
-                this.properties.position.x += offsetX;
-                this.properties.position.y += offsetY;
-            };
 
-            public addElement = (element) => {
+
+            public addElement = (element:CanvasBag.Node) => {
                 this.elements.push(element);
                 return this;
             };
 
-            public getElements = () => {
+            public getElements = ():Array< CanvasBag.Node>=> {
                 return this.elements;
             };
 
@@ -116,7 +120,7 @@ module CanvasBag {
                             imported = new BasicShapes.Custom();
                             break;
                         case ContainerType.BASIC:
-                            imported = new Container.Basic();
+                            imported = new BasicContainer.SimpleContainer();
                             break;
                         case SpriteType.IMAGE:
                             imported = new Sprites.Image();

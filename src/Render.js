@@ -5,6 +5,8 @@
 ///<reference path="./connections/ConnectionType" />
 ///<reference path="./connections/SimpleConnection" />
 ///<reference path="sprites/Text.ts" />
+///<reference path="scene/Scene.ts" />
+///<reference path="containers/BasicContainerPrototype.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Render = (function () {
@@ -341,7 +343,7 @@ var CanvasBag;
                     do {
                         offsetX += element.offsetLeft;
                         offsetY += element.offsetTop;
-                    } while ((element = element.offsetParent));
+                    } while ((element == element.offsetParent));
                 }
                 mx = e.pageX - offsetX;
                 my = e.pageY - offsetY;

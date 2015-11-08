@@ -1,30 +1,33 @@
 ///<reference path="./ConnectionType" />
 ///<reference path="./BasicConnectionPrototype" />
-///<reference path="./BasicConnection" />
 
 module CanvasBag {
     export module Connections {
         export interface SimpleConnectionProperties extends BasicConnectionProperties {
         }
 
-        export class SimpleConnection extends BasicConnectionPrototype implements BasicConnection {
+        export class SimpleConnection extends BasicConnectionPrototype {
 
             constructor() {
                 super();
                 this.setType(ConnectionType.SIMPLE);
             }
 
-            public getProperties = ():SimpleConnectionProperties => {
+            getProperties():SimpleConnectionProperties {
                 return <SimpleConnectionProperties>this.getBaseProperties();
             };
 
-            public setProperties = (properties:SimpleConnectionProperties) => {
+            setProperties(properties:SimpleConnectionProperties) {
                 this.setBaseProperties(properties);
             };
 
-            public contains = (point:Point):boolean => {
+            contains(point:Point):boolean {
                 console.log("Simple connection doesnt support 'contain' method.");
                 return false;
+            }
+
+            move(offsetX:number, offsetY:number) {
+                throw "Method move is not supported in SimpleConnection yet."
             }
         }
     }
