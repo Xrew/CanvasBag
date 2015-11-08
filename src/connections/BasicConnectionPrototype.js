@@ -1,6 +1,7 @@
 ///<reference path="../render/Point" />
 ///<reference path="./ConnectionType" />
 ///<reference path="../utils/Guid" />
+///<reference path="../render/base/Color.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicConnectionPrototype = (function () {
@@ -15,10 +16,10 @@ var CanvasBag;
             this.setType = function (type) {
                 _this.type = type;
             };
-            this.getProperties = function () {
+            this.getBaseProperties = function () {
                 return _this.properties;
             };
-            this.setProperties = function (properties) {
+            this.setBaseProperties = function (properties) {
                 _this.properties = properties;
             };
             this.setTemporaryEnd = function (pemporaryEnd) {

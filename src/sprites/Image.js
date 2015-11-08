@@ -15,8 +15,14 @@ var CanvasBag;
             function Image() {
                 var _this = this;
                 _super.call(this);
+                this.setProperties = function (properties) {
+                    _this.setBaseProperties(properties);
+                };
+                this.getProperties = function () {
+                    return _this.getBaseProperties();
+                };
                 this.contains = function (point) {
-                    var properties = _this.getProperties();
+                    var properties = _this.getBaseProperties();
                     var renderOffset = _this.getRenderOffset();
                     var centerX = properties.position.x + renderOffset.x;
                     var centerY = properties.position.y + renderOffset.y;

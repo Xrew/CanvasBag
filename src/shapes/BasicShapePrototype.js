@@ -1,6 +1,9 @@
 ///<reference path="../utils/Guid" />
 ///<reference path="./ShapeType" />
 ///<reference path="../utils/ObjectUtils" />
+///<reference path="../render/RenderOffset.ts" />
+///<reference path="../render/base/Color.ts" />
+///<reference path="../render/Point.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicShapePrototype = (function () {
@@ -15,10 +18,10 @@ var CanvasBag;
             this.setType = function (type) {
                 _this.type = type;
             };
-            this.getProperties = function () {
+            this.getBaseProperties = function () {
                 return _this.properties;
             };
-            this.setProperties = function (pProperties) {
+            this.setBaseProperties = function (pProperties) {
                 _this.properties = pProperties;
             };
             this.click = function () {
@@ -48,6 +51,7 @@ var CanvasBag;
             this.setBackgroundImage = function (base64String) {
                 _this.properties.base64Background = base64String;
             };
+            // TODO not sure what type is incoming type
             this.fromJSON = function (json) {
                 if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'id')) {
                     json.id = CanvasBag.Guid.generate();
@@ -83,6 +87,7 @@ var CanvasBag;
             this.onClickCallback = null;
             this.properties = null;
         }
+        // TODO not sure what type is returned type
         BasicShapePrototype.prototype.toJSON = function () {
             return {
                 id: this.id,

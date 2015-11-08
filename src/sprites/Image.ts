@@ -4,14 +4,29 @@
 
 module CanvasBag {
     export module Sprites {
+        export interface ImageSpriteProperties extends BasicSpriteProperties {
+            imageData: string;
+            width: number;
+            height: number;
+        }
+
         export class Image extends BasicSpritePrototype implements BasicSprite {
+
             constructor() {
                 super();
                 this.setType(SpriteType.IMAGE)
             }
 
+            public setProperties = (properties:ImageSpriteProperties) => {
+                this.setBaseProperties(properties);
+            };
+
+            public getProperties = ():ImageSpriteProperties => {
+                return <ImageSpriteProperties>this.getBaseProperties();
+            };
+
             public contains = (point):boolean => {
-                var properties = this.getProperties();
+                var properties = <ImageSpriteProperties>this.getBaseProperties();
                 var renderOffset = this.getRenderOffset();
 
                 var centerX = properties.position.x + renderOffset.x;
@@ -23,7 +38,7 @@ module CanvasBag {
             };
 
             public  move = (offsetX, offsetY) => {
-                var properties = this.getProperties();
+                var properties = <ImageSpriteProperties>this.getProperties();
 
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;

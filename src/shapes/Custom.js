@@ -16,11 +16,17 @@ var CanvasBag;
             function Custom() {
                 var _this = this;
                 _super.call(this);
+                this.setProperties = function (properties) {
+                    _this.setBaseProperties(properties);
+                };
+                this.getProperties = function () {
+                    return _this.getBaseProperties();
+                };
                 this.contains = function (point) {
-                    return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
+                    return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getBaseProperties().points, _this.getRenderOffset()));
                 };
                 this.move = function (offsetX, offsetY) {
-                    var properties = _this.getProperties();
+                    var properties = _this.getBaseProperties();
                     for (var i = 0; i < properties.points.length; i++) {
                         properties.points[i].x += offsetX;
                         properties.points[i].y += offsetY;

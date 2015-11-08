@@ -3,7 +3,7 @@ var CanvasBag;
     var ConnectionType = (function () {
         function ConnectionType() {
         }
-        ConnectionType.SIMPLE = "SIMPLE";
+        ConnectionType.SIMPLE = "CONNECTION_SIMPLE";
         return ConnectionType;
     })();
     CanvasBag.ConnectionType = ConnectionType;

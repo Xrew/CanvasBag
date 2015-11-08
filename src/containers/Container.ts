@@ -13,16 +13,16 @@
 
 module CanvasBag {
     export module Container {
-        export interface ContainerProperties {
+        export interface BasicContainerProperties {
             name: string;
             position: Point;
         }
 
         export class Basic {
             private id;
-            private properties:ContainerProperties;
+            private properties:BasicContainerProperties;
             private type:ContainerType;
-            private elements;
+            private elements: Array<Node>;
 
             constructor() {
                 this.id = Guid.generate();
@@ -39,11 +39,11 @@ module CanvasBag {
                 return this.id;
             };
 
-            public setProperties = (properties:ContainerProperties) => {
+            public setProperties = (properties:BasicContainerProperties) => {
                 this.properties = properties;
             };
 
-            public getProperties = ():ContainerProperties => {
+            public getProperties = ():BasicContainerProperties => {
                 return this.properties;
             };
 

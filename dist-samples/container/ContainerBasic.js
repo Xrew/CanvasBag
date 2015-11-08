@@ -18,7 +18,7 @@ window.onload = function () {
     });
 
     var circleLeft = new CanvasBag.BasicShapes.Circle();
-    circleLeft.setProperties({
+    circleLeft.setBaseProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -28,7 +28,7 @@ window.onload = function () {
     });
 
     var circleRight = new CanvasBag.BasicShapes.Circle();
-    circleRight.setProperties({
+    circleRight.setBaseProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',

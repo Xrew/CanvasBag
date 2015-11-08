@@ -1,14 +1,21 @@
 ///<reference path="../utils/Guid" />
 ///<reference path="../utils/ObjectUtils" />
+///<reference path="SpriteType.ts" />
+///<reference path="../render/Point.ts" />
+///<reference path="../render/RenderOffset.ts" />
 
 module CanvasBag {
-    export class BasicSpritePrototype {
+    export interface BasicSpriteProperties {
+        position: Point;
+        draggable: boolean;
+    }
 
-        private type;
-        private id;
-        private renderOffset;
-        private onClickCallback;
-        private properties;
+    export class BasicSpritePrototype {
+        private type:SpriteType;
+        private id:string;
+        private renderOffset:RenderOffset;
+        private onClickCallback:()=> void;
+        private properties:BasicSpriteProperties;
 
         constructor() {
             this.type = null;
@@ -19,23 +26,23 @@ module CanvasBag {
         }
 
 
-        public  getId = () => {
+        public  getId = ():string => {
             return this.id;
         };
 
-        public getType = () => {
+        public getType = ():SpriteType => {
             return this.type;
         };
 
-        public  setType = (type) => {
+        public  setType = (type:SpriteType) => {
             this.type = type;
         };
 
-        public getProperties = () => {
+        public getBaseProperties = ():BasicSpriteProperties => {
             return this.properties;
         };
 
-        public setProperties = (properties) => {
+        public setBaseProperties = (properties:BasicSpriteProperties) => {
             this.properties = properties;
         };
 
@@ -43,31 +50,31 @@ module CanvasBag {
             this.onClickCallback();
         };
 
-        public setOnClickListener = (callback) => {
+        public setOnClickListener = (callback:()=> void) => {
             this.onClickCallback = callback;
         };
 
-        public setRenderOffset = (offset) => {
+        public setRenderOffset = (offset:RenderOffset) => {
             this.renderOffset = offset;
         };
 
-        public getRenderOffset = () => {
+        public getRenderOffset = ():RenderOffset => {
             return this.renderOffset;
         };
 
-        public isDraggable = () => {
+        public isDraggable = ():boolean => {
             return this.properties.draggable;
         };
 
-        public setDraggable = (able) => {
+        public setDraggable = (able:boolean) => {
             this.properties.draggable = able;
         };
 
-        public setBackgroundImage = (imageData) => {
+        public setBackgroundImage = (imageData:string) => {
             this.properties.imageData = imageData;
         };
 
-        public toJSON = () => {
+        public toJSON = ():any => {
             return {
                 id: this.id,
                 type: this.type,
@@ -76,7 +83,7 @@ module CanvasBag {
             };
         };
 
-        public fromJSON = (json) => {
+        public fromJSON = (json:any) => {
             if (!ObjectUtils.hasDefinedProperty(json, 'id')) {
                 json.id = Guid.generate();
                 this.printWarningBasicSprite("ID");

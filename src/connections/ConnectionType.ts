@@ -1,5 +1,5 @@
 module CanvasBag {
     export class ConnectionType {
-        public static SIMPLE = "SIMPLE"
+        public static SIMPLE = "CONNECTION_SIMPLE";
     }
 }

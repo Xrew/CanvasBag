@@ -22,7 +22,7 @@ window.onload = function () {
     });
 
     var entryConnector1 = new CanvasBag.BasicShapes.Circle();
-    entryConnector1.setProperties({
+    entryConnector1.setBaseProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -33,7 +33,7 @@ window.onload = function () {
     });
 
     var endConnector1 = new CanvasBag.BasicShapes.Circle();
-    endConnector1.setProperties({
+    endConnector1.setBaseProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -70,7 +70,7 @@ window.onload = function () {
     });
 
     var entryConnector2 = new CanvasBag.BasicShapes.Circle();
-    entryConnector2.setProperties({
+    entryConnector2.setBaseProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -81,7 +81,7 @@ window.onload = function () {
     });
 
     var endConnector2 = new CanvasBag.BasicShapes.Circle();
-    endConnector2.setProperties({
+    endConnector2.setBaseProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',

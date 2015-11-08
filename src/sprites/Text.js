@@ -1,6 +1,7 @@
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
 ///<reference path="./BasicSprite" />
+///<reference path="../render/base/Font.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -15,6 +16,12 @@ var CanvasBag;
             function Text() {
                 var _this = this;
                 _super.call(this);
+                this.setProperties = function (properties) {
+                    _this.setBaseProperties(properties);
+                };
+                this.getProperties = function () {
+                    return _this.getBaseProperties();
+                };
                 this.contains = function (point) {
                     var properties = _this.getProperties();
                     var renderOffset = _this.getRenderOffset();

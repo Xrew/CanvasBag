@@ -4,11 +4,12 @@
 ///<reference path="./shapes/ShapeType.ts" />
 ///<reference path="./connections/ConnectionType" />
 ///<reference path="./connections/SimpleConnection" />
+///<reference path="sprites/Text.ts" />
 
 module CanvasBag {
     export class Render {
         private static RENDERING_INTERVAL = 40;
-        private context: CanvasRenderingContext2D;
+        private context:CanvasRenderingContext2D;
         private canvas;
         private scene;
         private canvasValid;
@@ -98,7 +99,7 @@ module CanvasBag {
             }
         };
 
-        private  renderText = (text) => {
+        private  renderText = (text:CanvasBag.Sprites.Text) => {
             var properties = text.getProperties();
             var renderOffset = text.getRenderOffset();
 
@@ -109,7 +110,7 @@ module CanvasBag {
             this.context.fillText(properties.content, properties.position.x - (properties.width / 2) + renderOffset.x, properties.position.y - (properties.height / 2) + renderOffset.y);
         };
 
-        private  renderImage = (image) => {
+        private  renderImage = (image:Canvas.Sprites.Image) => {
             var properties = image.getProperties();
             var renderOffset = image.getRenderOffset();
             var halfWidth = properties.width / 2;
@@ -127,7 +128,7 @@ module CanvasBag {
             if (properties.imageData !== undefined && properties.imageData !== null) {
                 var img = new Image();
 
-                img.onload = function() {
+                img.onload = function () {
                     _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                 };
 
@@ -137,7 +138,7 @@ module CanvasBag {
             this.finalizeRender(properties);
         };
 
-        private renderRectangle = (shape) => {
+        private renderRectangle = (shape:CanvasBag.BasicShapes.Rectangle) => {
             var properties = shape.getProperties();
             var renderOffset = shape.getRenderOffset();
             var halfWidth = properties.width / 2;
@@ -156,7 +157,7 @@ module CanvasBag {
             if (properties.base64Background !== undefined && properties.base64Background !== null) {
                 var img = new Image();
 
-                img.onload = function() {
+                img.onload = function () {
                     _context.drawImage(this, properties.position.x + renderOffset.x - halfWidth, properties.position.y + renderOffset.y - halfHeight, properties.width, properties.height);
                 };
 
@@ -166,7 +167,7 @@ module CanvasBag {
             this.finalizeRender(properties);
         };
 
-        private renderCircle = (shape) => {
+        private renderCircle = (shape:CanvasBag.BasicShapes.Circle) => {
             var properties = shape.getProperties();
             var renderOffset = shape.getRenderOffset();
 
@@ -175,14 +176,14 @@ module CanvasBag {
             this.finalizeRender(properties);
         };
 
-        private  renderTriangle = (shape) => {
+        private  renderTriangle = (shape:CanvasBag.BasicShapes.Triangle) => {
             if (shape.getProperties().points.length != 3) {
                 console.log("Shape is not a triangle. Cannot render.", shape);
             }
             this.renderCustomShape(shape);
         };
 
-        private renderCustomShape = (shape) => {
+        private renderCustomShape = (shape:CanvasBag.BasicShapes.Custom) => {
             var properties = shape.getProperties();
             var renderOffset = shape.getRenderOffset();
 
@@ -319,7 +320,7 @@ module CanvasBag {
         };
 
 
-        private isBasicContainer = (element): boolean => {
+        private isBasicContainer = (element):boolean => {
             return element !== null && element.getType() == CanvasBag.ContainerType.BASIC;
         }
 
@@ -346,7 +347,7 @@ module CanvasBag {
                 var element = this.detectElement(mousePosition);
                 var hotElement = null;
 
-                if(element == null) {
+                if (element == null) {
                     return;
                 }
 

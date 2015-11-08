@@ -4,14 +4,26 @@
 
 module CanvasBag {
     export module BasicShapes {
+        export interface RectangleShapeProperties extends BasicShapeProperties {
+        }
+
+
         export class Rectangle extends BasicShapePrototype implements BasicShape {
             constructor() {
                 super();
                 this.setType(ShapeType.RECTANGLE)
             }
 
+            public setProperties = (properties:RectangleShapeProperties) => {
+                this.setBaseProperties(properties);
+            };
+
+            public getProperties = ():RectangleShapeProperties => {
+                return <BasicShapeProperties>this.getBaseProperties();
+            };
+
             public contains = (point):boolean => {
-                var properties = this.getProperties();
+                var properties = <RectangleShapeProperties>this.getBaseProperties();
                 var renderOffset = this.getRenderOffset();
 
                 var centerX = properties.position.x + renderOffset.x;
@@ -23,7 +35,7 @@ module CanvasBag {
             };
 
             public  move = (offsetX, offsetY) => {
-                var properties = this.getProperties();
+                var properties = <RectangleShapeProperties>this.getBaseProperties();
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };

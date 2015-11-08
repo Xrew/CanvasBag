@@ -1,5 +1,8 @@
 ///<reference path="../utils/Guid" />
 ///<reference path="../utils/ObjectUtils" />
+///<reference path="SpriteType.ts" />
+///<reference path="../render/Point.ts" />
+///<reference path="../render/RenderOffset.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicSpritePrototype = (function () {
@@ -14,10 +17,10 @@ var CanvasBag;
             this.setType = function (type) {
                 _this.type = type;
             };
-            this.getProperties = function () {
+            this.getBaseProperties = function () {
                 return _this.properties;
             };
-            this.setProperties = function (properties) {
+            this.setBaseProperties = function (properties) {
                 _this.properties = properties;
             };
             this.click = function () {

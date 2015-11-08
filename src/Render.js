@@ -4,6 +4,7 @@
 ///<reference path="./shapes/ShapeType.ts" />
 ///<reference path="./connections/ConnectionType" />
 ///<reference path="./connections/SimpleConnection" />
+///<reference path="sprites/Text.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Render = (function () {

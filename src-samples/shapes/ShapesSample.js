@@ -21,7 +21,7 @@ window.onload = function () {
     scene.addShape(rectangle);
 
     var circle = new CanvasBag.BasicShapes.Circle();
-    circle.setProperties({
+    circle.setBaseProperties({
         position: {x: 50, y: 50},
         radius: 20,
         borderColor: 'green',

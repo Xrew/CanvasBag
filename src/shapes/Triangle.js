@@ -16,6 +16,12 @@ var CanvasBag;
             function Triangle() {
                 var _this = this;
                 _super.call(this);
+                this.setProperties = function (properties) {
+                    _this.setBaseProperties(properties);
+                };
+                this.getProperties = function () {
+                    return _this.getBaseProperties();
+                };
                 this.contains = function (point) {
                     return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(_this.getProperties().points, _this.getRenderOffset()));
                 };

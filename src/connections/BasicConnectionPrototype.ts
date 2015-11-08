@@ -1,15 +1,16 @@
 ///<reference path="../render/Point" />
 ///<reference path="./ConnectionType" />
 ///<reference path="../utils/Guid" />
+///<reference path="../render/base/Color.ts" />
 
 
 module CanvasBag {
-    export interface ConnectionProperties {
+    export interface BasicConnectionProperties {
         position: Point;
         width: number;
         height: number;
-        borderColor: string;
-        backgroundColor: string;
+        borderColor: Base.Color;
+        backgroundColor: Base.Color;
         borderWidth: number;
         draggable: boolean;
         joinable: boolean;
@@ -21,12 +22,12 @@ module CanvasBag {
     }
 
     export class BasicConnectionPrototype {
-        private id;
+        private id:string;
         private type:ConnectionType;
-        private properties:ConnectionProperties;
-        private onClickCallback;
+        private properties:BasicConnectionProperties;
+        private onClickCallback:() => void;
         private bindings:ConnectionBinding;
-        private temporaryEnd;
+        private temporaryEnd:Point;
 
         constructor() {
             this.type = null;
@@ -45,15 +46,15 @@ module CanvasBag {
             return this.type;
         };
 
-        public setType = (type:ConnectionType) => {
+        protected setType = (type:ConnectionType) => {
             this.type = type;
         };
 
-        public getProperties = ():ConnectionProperties => {
+        protected getBaseProperties = ():BasicConnectionProperties => {
             return this.properties;
         };
 
-        public setProperties = (properties:ConnectionProperties) => {
+        protected setBaseProperties = (properties:BasicConnectionProperties) => {
             this.properties = properties;
         };
 

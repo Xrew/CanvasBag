@@ -11,6 +11,7 @@
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
 ///<reference path="./SceneType" />
+///<reference path="../connections/BasicConnection.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Scene;

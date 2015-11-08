@@ -1,14 +1,32 @@
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
 ///<reference path="./BasicSprite" />
+///<reference path="../render/base/Font.ts" />
 
 module CanvasBag {
     export module Sprites {
+        export interface TextSpriteProperties extends BasicSpriteProperties {
+            fontSize: string;
+            fontFamily: Base.Font;
+            content: string;
+            width: number;
+            height: number;
+        }
+
+
         export class Text extends BasicSpritePrototype implements BasicSprite {
             constructor() {
                 super();
                 this.setType(SpriteType.TEXT)
             }
+
+            public setProperties = (properties:TextSpriteProperties) =>  {
+                this.setBaseProperties(properties);
+            };
+
+            public getProperties = ():TextSpriteProperties => {
+                return <TextSpriteProperties>this.getBaseProperties();
+            };
 
             public contains = (point):boolean => {
                 var properties = this.getProperties();

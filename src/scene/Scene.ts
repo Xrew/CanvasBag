@@ -11,15 +11,16 @@
 ///<reference path="../shapes/Rectangle" />
 ///<reference path="../shapes/Triangle" />
 ///<reference path="./SceneType" />
+///<reference path="../connections/BasicConnection.ts" />
 
 module CanvasBag {
     export module Scene {
         export class Basic {
-            private id;
+            private id: string;
             private type: SceneType;
-            private nodes;
-            private connections;
-            private sprites;
+            private nodes: Array<CanvasBag.Node>;
+            private connections: Array<BasicConnection>;
+            private sprites: Array<BasicSprite>;
             private valid:boolean;
 
             constructor() {

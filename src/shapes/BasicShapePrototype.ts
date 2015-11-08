@@ -1,14 +1,28 @@
 ///<reference path="../utils/Guid" />
 ///<reference path="./ShapeType" />
 ///<reference path="../utils/ObjectUtils" />
+///<reference path="../render/RenderOffset.ts" />
+///<reference path="../render/base/Color.ts" />
+///<reference path="../render/Point.ts" />
 
 module CanvasBag {
+    export interface BasicShapeProperties {
+        position: Point;
+        width: number;
+        height: number;
+        borderColor: Base.Color;
+        borderWidth: number;
+        draggable: boolean;
+        joinable: boolean;
+        base64Background: string;
+    }
+
     export class BasicShapePrototype {
-        private type;
-        private id;
-        private renderOffset;
-        private onClickCallback;
-        private properties;
+        private type: ShapeType;
+        private id: string;
+        private renderOffset: RenderOffset;
+        private onClickCallback: () => void;
+        private properties: BasicShapeProperties;
 
         constructor() {
             this.id = Guid.generate();
@@ -17,23 +31,23 @@ module CanvasBag {
             this.properties = null;
         }
 
-        public getId = () => {
+        public getId = () : string => {
             return this.id;
         };
 
-        public getType = () => {
+        public getType = () : ShapeType => {
             return this.type;
         };
 
-        public setType = (type: ShapeType) => {
+        protected setType = (type: ShapeType) => {
             this.type = type;
         };
 
-        public getProperties = () => {
+        protected getBaseProperties = () : BasicShapeProperties => {
             return this.properties;
         };
 
-        public setProperties = (pProperties) => {
+        protected setBaseProperties = (pProperties: BasicShapeProperties) => {
             this.properties = pProperties;
         };
 
@@ -41,39 +55,40 @@ module CanvasBag {
             this.onClickCallback();
         };
 
-        public setOnClickListener = (callback) => {
+        public setOnClickListener = (callback : () => void) => {
             this.onClickCallback = callback;
         };
 
-        public setRenderOffset = (offset) => {
+        public setRenderOffset = (offset: RenderOffset) => {
             this.renderOffset = offset;
         };
 
-        public getRenderOffset = () => {
+        public getRenderOffset = () : RenderOffset => {
             return this.renderOffset;
         };
 
-        public isDraggable = () => {
+        public isDraggable = () : boolean => {
             return this.properties.draggable;
         };
 
-        public setDraggable = (able) => {
+        public setDraggable = (able: boolean) => {
             this.properties.draggable = able;
         };
 
-        public isJoinAble = () => {
+        public isJoinAble = () : boolean  => {
             return this.properties.joinable;
         };
 
-        public setJoinAble = (able) => {
+        public setJoinAble = (able : boolean) => {
             this.properties.joinable = able;
         };
 
-        public setBackgroundImage = (base64String) => {
+        public setBackgroundImage = (base64String : string) => {
             this.properties.base64Background = base64String;
         };
 
-        public toJSON() {
+        // TODO not sure what type is returned type
+        public toJSON() : any {
             return {
                 id: this.id,
                 type: this.type,
@@ -82,7 +97,8 @@ module CanvasBag {
             };
         }
 
-        public fromJSON = (json) => {
+        // TODO not sure what type is incoming type
+        public fromJSON = (json: any) : BasicShapePrototype => {
             if (!ObjectUtils.hasDefinedProperty(json, 'id')) {
                 json.id = Guid.generate();
                 this.printWarningBasicShape("ID");
@@ -111,11 +127,11 @@ module CanvasBag {
             return this;
         };
 
-        private printWarningBasicShape = (msg) => {
+        private printWarningBasicShape = (msg: any) => {
             console.log("WARNING: " + " should be defined. Object is loaded from JSON, be careful.")
         };
 
-        private printErrorBasicShape = (msg) => {
+        private printErrorBasicShape = (msg: any) => {
             console.log("ERROR: " + " must be defined. Object is loaded from JSON.")
         };
     }

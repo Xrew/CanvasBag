@@ -13,7 +13,14 @@ var CanvasBag;
         var SimpleConnection = (function (_super) {
             __extends(SimpleConnection, _super);
             function SimpleConnection() {
+                var _this = this;
                 _super.call(this);
+                this.getProperties = function () {
+                    return _this.getBaseProperties();
+                };
+                this.setProperties = function (properties) {
+                    _this.setBaseProperties(properties);
+                };
                 this.contains = function (point) {
                     console.log("Simple connection doesnt support 'contain' method.");
                     return false;
