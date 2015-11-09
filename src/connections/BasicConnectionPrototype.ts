@@ -6,103 +6,103 @@
 
 
 module CanvasBag {
-    export interface BasicConnectionProperties {
-        position: Point;
-        width: number;
-        height: number;
-        borderColor: Base.Color;
-        backgroundColor: Base.Color;
-        borderWidth: number;
-        draggable: boolean;
-        joinable: boolean;
-    }
-
-    export interface ConnectionBinding {
-        entry:Point;
-        end:Point;
-    }
-
-    export abstract class BasicConnectionPrototype implements CanvasBag.Node{
-        public id:string;
-        private type:ConnectionType;
-        private properties:BasicConnectionProperties;
-        private onClickCallback:() => void;
-        private bindings:ConnectionBinding;
-        private temporaryEnd:Point;
-
-        constructor() {
-            this.type = null;
-            this.id = Guid.generate();
-            this.properties = null;
-            this.onClickCallback = null;
-            this.bindings = {entry: null, end: null};
-            this.temporaryEnd = null;
+        export interface BasicConnectionProperties {
+            position: Point;
+            width: number;
+            height: number;
+            borderColor: Base.Color;
+            backgroundColor: Base.Color;
+            borderWidth: number;
+            draggable: boolean;
+            joinable: boolean;
         }
 
-        public abstract getProperties():BasicConnectionProperties;
-        public abstract setProperties(properties: BasicConnectionProperties);
-        public abstract contains(point: Point) : boolean;
-        public abstract move(offsetX: number, offsetY: number);
-
-        public getId = () => {
-            return this.id;
-        };
-
-        public getType = ():ConnectionType => {
-            return this.type;
-        };
-
-        protected setType = (type:ConnectionType) => {
-            this.type = type;
-        };
-
-        protected getBaseProperties = ():BasicConnectionProperties => {
-            return this.properties;
-        };
-
-        protected setBaseProperties = (properties:BasicConnectionProperties) => {
-            this.properties = properties;
-        };
-
-        public click() {
-            this.onClickCallback();
+        export interface ConnectionBinding {
+            entry:Point;
+            end:Point;
         }
 
-        public setOnClickListener(callback) {
-            this.onClickCallback = callback;
-        }
+        export abstract class BasicConnectionPrototype implements CanvasBag.Node {
+            public id:string;
+            private type:ConnectionType;
+            private properties:BasicConnectionProperties;
+            private onClickCallback:() => void;
+            private bindings:ConnectionBinding;
+            private temporaryEnd:Point;
 
-        public getBindings():ConnectionBinding {
-            return this.bindings;
-        }
+            constructor() {
+                this.type = null;
+                this.id = Guid.generate();
+                this.properties = null;
+                this.onClickCallback = null;
+                this.bindings = {entry: null, end: null};
+                this.temporaryEnd = null;
+            }
 
-        public setBindings(bindings:ConnectionBinding) {
-            this.bindings = bindings;
-        }
+            public abstract getProperties():BasicConnectionProperties;
+            public abstract setProperties(properties:BasicConnectionProperties);
+            public abstract contains(point:Point):boolean;
+            public abstract move(offsetX:number, offsetY:number);
 
-        public getTemporaryEnd() {
-            return this.temporaryEnd;
-        }
-
-        public setTemporaryEnd = (pemporaryEnd) => {
-            this.temporaryEnd = pemporaryEnd;
-        };
-
-        public setEntryBinding = (entryBinding:Point) => {
-            this.bindings.entry = entryBinding;
-        };
-
-        public setEndBinding = (entryBinding:Point) => {
-            this.bindings.end = entryBinding;
-        };
-
-        public toJSON = () => {
-            return {
-                id: this.id,
-                type: this.type,
-                properties: this.properties,
-                bindings: this.bindings
+            public getId = () => {
+                return this.id;
             };
+
+            public getType = ():ConnectionType => {
+                return this.type;
+            };
+
+            protected setType = (type:ConnectionType) => {
+                this.type = type;
+            };
+
+            protected getBaseProperties = ():BasicConnectionProperties => {
+                return this.properties;
+            };
+
+            protected setBaseProperties = (properties:BasicConnectionProperties) => {
+                this.properties = properties;
+            };
+
+            public click() {
+                this.onClickCallback();
+            }
+
+            public setOnClickListener(callback) {
+                this.onClickCallback = callback;
+            }
+
+            public getBindings():ConnectionBinding {
+                return this.bindings;
+            }
+
+            public setBindings(bindings:ConnectionBinding) {
+                this.bindings = bindings;
+            }
+
+            public getTemporaryEnd() {
+                return this.temporaryEnd;
+            }
+
+            public setTemporaryEnd = (pemporaryEnd) => {
+                this.temporaryEnd = pemporaryEnd;
+            };
+
+            public setEntryBinding = (entryBinding:Point) => {
+                this.bindings.entry = entryBinding;
+            };
+
+            public setEndBinding = (entryBinding:Point) => {
+                this.bindings.end = entryBinding;
+            };
+
+            public toJSON = () => {
+                return {
+                    id: this.id,
+                    type: this.type,
+                    properties: this.properties,
+                    bindings: this.bindings
+                };
+            }
         }
-    }
 }

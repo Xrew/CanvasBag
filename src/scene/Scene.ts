@@ -70,7 +70,7 @@ module CanvasBag {
                 return this;
             };
 
-            public addContainer = (container: BasicContainer.BasicContainerPrototype) => {
+            public addContainer = (container: BasicContainerPrototype) => {
                 this.addNode(<CanvasBag.Node>container);
                 return this;
             };

@@ -7,15 +7,17 @@
 ///<reference path="../render/Node.ts" />
 
 module CanvasBag {
+
     export interface BasicShapeProperties {
         position: Point;
         width: number;
         height: number;
         borderColor: Base.Color;
+        backgroundColor?: Base.Color;
         borderWidth: number;
         draggable: boolean;
         joinable: boolean;
-        base64Background: string;
+        base64Background?: string;
     }
 
     export abstract class BasicShapePrototype implements CanvasBag.Node {

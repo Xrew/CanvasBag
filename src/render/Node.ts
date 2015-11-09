@@ -12,5 +12,6 @@ module CanvasBag {
         click?: () => void;
         isJoinAble?: () => boolean;
         isDraggable?: () => boolean;
+        detectInnerElement? : (point: Point) => Node;
     }
 }

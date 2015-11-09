@@ -18,7 +18,7 @@ window.onload = function () {
     });
 
     var circleLeft = new CanvasBag.BasicShapes.Circle();
-    circleLeft.setBaseProperties({
+    circleLeft.setProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -28,7 +28,7 @@ window.onload = function () {
     });
 
     var circleRight = new CanvasBag.BasicShapes.Circle();
-    circleRight.setBaseProperties({
+    circleRight.setProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -37,7 +37,7 @@ window.onload = function () {
         draggable: false
     });
 
-    var containerBasic = new  CanvasBag.Container.Basic();
+    var containerBasic = new  CanvasBag.BasicContainer.SimpleContainer();
     containerBasic.setProperties({
         name: "containerBasic1",
         position: {x: 200, y: 100}

@@ -37,7 +37,7 @@ window.onload = function () {
         draggable: false
     });
 
-    var containerBasic = new CanvasBag.Container.Basic();
+    var containerBasic = new CanvasBag.BasicContainer.SimpleContainer();
     containerBasic.setProperties({
         name: "containerBasic1",
         position: {x: 500, y: 200}

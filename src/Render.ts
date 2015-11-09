@@ -6,29 +6,29 @@
 ///<reference path="./connections/SimpleConnection" />
 ///<reference path="sprites/Text.ts" />
 ///<reference path="scene/Scene.ts" />
-///<reference path="containers/BasicContainerPrototype.ts" />
+///<reference path="containers/SimpleContainer.ts" />
 
 module CanvasBag {
     export class Render {
-        private static RENDERING_INTERVAL = 40;
+        private RENDERING_INTERVAL:number = 40;
         private context:CanvasRenderingContext2D;
-        private canvas: HTMLCanvasElement;
-        private scene: CanvasBag.Scene.Basic;
-        private canvasValid: boolean;
+        private canvas:HTMLCanvasElement;
+        private scene:CanvasBag.Scene.Basic;
+        private canvasValid:boolean;
 
         // Keep track when we are dragging
-        private isDragging: boolean;
-        private draggingElement: CanvasBag.Node;
-        private draggingMousePositionPrevious: Point;
+        private isDragging:boolean;
+        private draggingElement:CanvasBag.Node;
+        private draggingMousePositionPrevious:Point;
 
         // Keep track when we are joining
         private isJoining:boolean;
-        private joiningElementStart: CanvasBag.Node;
-        private joiningMousePosition: Point;
+        private joiningElementStart:CanvasBag.Node;
+        private joiningMousePosition:Point;
         private newConnection = null;
 
         constructor() {
-            window.setInterval(this.render, Render.RENDERING_INTERVAL);
+            window.setInterval(this.render, 40);
             this.context = null;
             this.canvas = null;
             this.scene = null;
@@ -44,12 +44,12 @@ module CanvasBag {
             this.newConnection = null;
         }
 
-        public setRenderingInterval = (interval) => {
-            if (interval > 0) {
-                Render.RENDERING_INTERVAL = interval;
-            } else {
-                console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
-            }
+        public setRenderingInterval = (interval: number) => {
+            //if (interval > 0) {
+            //    this.RENDERING_INTERVAL = interval;
+            //} else {
+            //    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
+            //}
         };
 
         public setCanvas = (canvas) => {
@@ -189,7 +189,7 @@ module CanvasBag {
             var properties = shape.getProperties();
             var renderOffset = shape.getRenderOffset();
 
-            var first:RenderedPoint;
+            var first:RenderedPoint = null;
             properties.points.forEach((point, index) => {
                 if (index == 0) {
                     this.context.beginPath();
@@ -301,7 +301,7 @@ module CanvasBag {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         };
 
-        private detectElement = (point) : CanvasBag.Node => {
+        private detectElement = (point):CanvasBag.Node => {
             var nodes = this.scene.getAllNodes();
             var sprites = this.scene.getAllSprites();
 
@@ -324,7 +324,7 @@ module CanvasBag {
 
         private isBasicContainer = (element):boolean => {
             return element !== null && element.getType() == CanvasBag.ContainerType.BASIC;
-        }
+        };
 
         private initCanvasBehaviour = () => {
             // Prevent selection of text in canvas
@@ -354,7 +354,7 @@ module CanvasBag {
                 }
 
                 if (this.isBasicContainer(element)) {
-                    hotElement = (<BasicContainer.BasicContainerPrototype>element).detectInnerElement(mousePosition)
+                    hotElement = (<Node>element).detectInnerElement(mousePosition)
                 } else {
                     hotElement = element;
                 }
@@ -402,11 +402,11 @@ module CanvasBag {
                     var mousePosition = this.getMousePosition(e);
                     var joiningShapeEnd = this.detectElement(mousePosition);
                     if (this.isBasicContainer(joiningShapeEnd)) {
-                        joiningShapeEnd =  (<BasicContainer.BasicContainerPrototype>joiningShapeEnd).detectInnerElement(mousePosition);
+                        joiningShapeEnd = (<Node>joiningShapeEnd).detectInnerElement(mousePosition);
                     }
                     if (joiningShapeEnd !== null && joiningShapeEnd.isJoinAble()) {
                         if (this.newConnection != null) {
-                            this.newConnection.setBindings({entry: this.joiningElementStart, end: joiningShapeEnd})
+                            this.newConnection.setBindings({entry: this.joiningElementStart, end: joiningShapeEnd});
                             // To prevent click listener when ending dragging
                             setTimeout(() => {
                                 this.isJoining = false;

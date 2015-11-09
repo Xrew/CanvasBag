@@ -18,22 +18,18 @@ var CanvasBag;
             SimpleContainer.prototype.getProperties = function () {
                 return this.getBaseProperties();
             };
-            ;
             SimpleContainer.prototype.setProperties = function (properties) {
                 this.setBaseProperties(properties);
             };
-            ;
             SimpleContainer.prototype.contains = function (point) {
                 return this.detectInnerElement(point) !== null;
             };
-            ;
             SimpleContainer.prototype.move = function (offsetX, offsetY) {
                 this.getBaseProperties().position.x += offsetX;
                 this.getBaseProperties().position.y += offsetY;
             };
-            ;
             return SimpleContainer;
-        })(BasicContainer.BasicContainerPrototype);
+        })(CanvasBag.BasicContainerPrototype);
         BasicContainer.SimpleContainer = SimpleContainer;
     })(BasicContainer = CanvasBag.BasicContainer || (CanvasBag.BasicContainer = {}));
 })(CanvasBag || (CanvasBag = {}));

@@ -6,20 +6,20 @@
 ///<reference path="./connections/SimpleConnection" />
 ///<reference path="sprites/Text.ts" />
 ///<reference path="scene/Scene.ts" />
-///<reference path="containers/BasicContainerPrototype.ts" />
+///<reference path="containers/SimpleContainer.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Render = (function () {
         function Render() {
             var _this = this;
+            this.RENDERING_INTERVAL = 40;
             this.newConnection = null;
             this.setRenderingInterval = function (interval) {
-                if (interval > 0) {
-                    Render.RENDERING_INTERVAL = interval;
-                }
-                else {
-                    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
-                }
+                //if (interval > 0) {
+                //    this.RENDERING_INTERVAL = interval;
+                //} else {
+                //    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
+                //}
             };
             this.setCanvas = function (canvas) {
                 _this.canvas = canvas;
@@ -120,7 +120,7 @@ var CanvasBag;
             this.renderCustomShape = function (shape) {
                 var properties = shape.getProperties();
                 var renderOffset = shape.getRenderOffset();
-                var first;
+                var first = null;
                 properties.points.forEach(function (point, index) {
                     if (index == 0) {
                         _this.context.beginPath();
@@ -350,7 +350,7 @@ var CanvasBag;
                 // We return a simple javascript object (a hash) with x and y defined
                 return { x: mx, y: my };
             };
-            window.setInterval(this.render, Render.RENDERING_INTERVAL);
+            window.setInterval(this.render, 40);
             this.context = null;
             this.canvas = null;
             this.scene = null;
@@ -363,7 +363,6 @@ var CanvasBag;
             this.joiningMousePosition = null;
             this.newConnection = null;
         }
-        Render.RENDERING_INTERVAL = 40;
         return Render;
     })();
     CanvasBag.Render = Render;

@@ -1,5 +1,5 @@
 
-window.onload = function () {
+function renderSample() {
     var canvas = document.getElementById("connectionBasic1");
     var render = new CanvasBag.Render();
     render.setCanvas(canvas);
@@ -22,7 +22,7 @@ window.onload = function () {
     });
 
     var entryConnector1 = new CanvasBag.BasicShapes.Circle();
-    entryConnector1.setBaseProperties({
+    entryConnector1.setProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -33,7 +33,7 @@ window.onload = function () {
     });
 
     var endConnector1 = new CanvasBag.BasicShapes.Circle();
-    endConnector1.setBaseProperties({
+    endConnector1.setProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -43,7 +43,7 @@ window.onload = function () {
         joinable: true
     });
 
-    var moduleContainer1 = new CanvasBag.Container.Basic()
+    var moduleContainer1 = new CanvasBag.BasicContainer.SimpleContainer()
     moduleContainer1.setProperties({
         name: "containerBasic1",
         position: {x: 300, y: 200}
@@ -70,7 +70,7 @@ window.onload = function () {
     });
 
     var entryConnector2 = new CanvasBag.BasicShapes.Circle();
-    entryConnector2.setBaseProperties({
+    entryConnector2.setProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -81,7 +81,7 @@ window.onload = function () {
     });
 
     var endConnector2 = new CanvasBag.BasicShapes.Circle();
-    endConnector2.setBaseProperties({
+    endConnector2.setProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',
@@ -91,7 +91,7 @@ window.onload = function () {
         joinable: true
     });
 
-    var moduleContainer2 = new CanvasBag.Container.Basic()
+    var moduleContainer2 = new CanvasBag.BasicContainer.SimpleContainer()
     moduleContainer2.setProperties({
         name: "containerBasic1",
         position: {x: 700, y: 200}
