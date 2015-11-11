@@ -59,7 +59,7 @@ module CanvasBag {
                 return this.valid;
             };
 
-            public addNode = (node: CanvasBag.Node) => {
+            private addNode = (node: CanvasBag.Node) => {
                 this.nodes.push(node);
                 this.invalidateScene();
                 return this;
@@ -95,7 +95,7 @@ module CanvasBag {
                 }
             };
 
-            public  getConnectionById = (connectionId: string) => {
+            public  getConnectionById = (connectionId: string):BasicConnectionPrototype => {
                 for (var i = 0; i < this.connections.length; i++) {
                     if (this.connections[i].getId() == connectionId) {
                         return this.connections[i];

@@ -28,7 +28,7 @@ module CanvasBag {
         private newConnection = null;
 
         constructor() {
-            window.setInterval(this.render, 40);
+            window.setInterval(this.render, this.RENDERING_INTERVAL);
             this.context = null;
             this.canvas = null;
             this.scene = null;
@@ -45,11 +45,11 @@ module CanvasBag {
         }
 
         public setRenderingInterval = (interval: number) => {
-            //if (interval > 0) {
-            //    this.RENDERING_INTERVAL = interval;
-            //} else {
-            //    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
-            //}
+            if (interval > 0) {
+                this.RENDERING_INTERVAL = interval;
+            } else {
+                console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
+            }
         };
 
         public setCanvas = (canvas) => {

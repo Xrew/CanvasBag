@@ -15,11 +15,12 @@ var CanvasBag;
             this.RENDERING_INTERVAL = 40;
             this.newConnection = null;
             this.setRenderingInterval = function (interval) {
-                //if (interval > 0) {
-                //    this.RENDERING_INTERVAL = interval;
-                //} else {
-                //    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
-                //}
+                if (interval > 0) {
+                    _this.RENDERING_INTERVAL = interval;
+                }
+                else {
+                    console.log("Invalid RENDERING_INTERVAL has been set for canvas render.");
+                }
             };
             this.setCanvas = function (canvas) {
                 _this.canvas = canvas;
@@ -350,7 +351,7 @@ var CanvasBag;
                 // We return a simple javascript object (a hash) with x and y defined
                 return { x: mx, y: my };
             };
-            window.setInterval(this.render, 40);
+            window.setInterval(this.render, this.RENDERING_INTERVAL);
             this.context = null;
             this.canvas = null;
             this.scene = null;
