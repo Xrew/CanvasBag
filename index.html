@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>CanvasBag by Xrew</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>CanvasBag</h1>
+        <h2>Open source canvas oriented library to easy render complex graphics in your web applications.</h2>
+        <a href="https://github.com/Xrew/CanvasBagTS" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a id="welcome-to-canvasbag-pages" class="anchor" href="#welcome-to-canvasbag-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to CanvasBag Pages.</h3>
+
+<p>CanvasBag graphic library written in TypeScript is your way to create application easy and quickly. It provides toolkit of basic shapes like circle, rectangle, triangle or custom shapes defined by points in array. You can compose more complex object with containers. <strong>It's in your hands!</strong></p>
+
+<p>CanvasBag is still under development. Some function doesn't have to work correctly. If you have any idea how to improve it, please contact me on GitHub.</p>
+
+<h3>
+<a id="render" class="anchor" href="#render" aria-hidden="true"><span class="octicon octicon-link"></span></a>RENDER</h3>
+
+<p>Render is the core part of the library. The purpose of <code>render</code> is to render the <code>scene</code> object to your <code>canvas</code>. First thing you have to do is define canvas in your html page and import CanvasBag library. Example below using jade.</p>
+
+<div class="highlight highlight-source-jade"><pre>     <span class="pl-ent">html</span>
+         <span class="pl-ent">head</span>
+<span class="pl-s1">             <span class="pl-ent">script</span><span class="pl-c1">(</span><span class="pl-e">type</span>=<span class="pl-s">"text/javascript"</span>, <span class="pl-e">src</span>=<span class="pl-s">"../bundle.js"</span><span class="pl-c1">)</span></span>
+<span class="pl-s1">             <span class="pl-ent">script</span><span class="pl-c1">(</span><span class="pl-e">type</span>=<span class="pl-s">"text/javascript"</span>, <span class="pl-e">src</span>=<span class="pl-s">"connectionBasic.js"</span><span class="pl-c1">)</span></span>
+<span class="pl-s1"></span>         <span class="pl-ent">body</span>
+             <span class="pl-ent">canvas</span><span class="pl-c1">(</span><span class="pl-e">id</span>=<span class="pl-s">"connectionBasic1"</span>, <span class="pl-e">width</span>=<span class="pl-s">"1000"</span>, <span class="pl-e">height</span>=<span class="pl-s">"800"</span>, <span class="pl-e">style</span>=<span class="pl-s">"float:left;"</span><span class="pl-c1">)</span>
+<span class="pl-s1">             <span class="pl-ent">script</span><span class="pl-c1">(</span><span class="pl-e">type</span>=<span class="pl-s">'text/javascript'</span><span class="pl-c1">)</span>.</span>
+<span class="pl-s1">                  <span class="pl-c1">window</span>.onload <span class="pl-k">=</span> renderSample();</span></pre></div>
+
+<p>The only thing to connect <code>canvas</code> with <code>render</code> is the next part of code:</p>
+
+<div class="highlight highlight-source-js"><pre>     <span class="pl-k">var</span> canvas <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">"</span>connectionBasic1<span class="pl-pds">"</span></span>);
+     <span class="pl-k">var</span> render <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CanvasBag.Render</span>();
+     render.setCanvas(canvas);</pre></div>
+
+<p><strong>That's all</strong>. Now you can add <code>scene</code>, <code>container</code>, <code>shapes</code> and other things to <code>render</code>. All objects inside render will be automatically rendered as soon as possible.</p>
+
+<p><strong>Available <code>RENDER</code> methods</strong></p>
+
+<ul>
+<li> <code>setRenderingInterval(interval:number)</code> - Define how ofteren <code>render</code> re-render the canvas</li>
+<li> <code>setCanvas(canvas)</code> - Connect <code>render</code> with <code>canvas</code> on the page</li>
+<li> <code>addScene(scene: CanvasBag.Scene)</code> - The main scene of render. Only one scene per canvas can be defined. </li>
+<li> <code>render()</code> - Trigger manually render of <code>canvas</code> (re-rendered only if scene is invalidated)</li>
+</ul>
+
+<h3>
+<a id="scene" class="anchor" href="#scene" aria-hidden="true"><span class="octicon octicon-link"></span></a>SCENE</h3>
+
+<p>Scene hold all others objects. All rendered objects in <code>canvas</code>. In present only <strong>one</strong> <code>scene</code> is permitted per <code>render</code> and <code>canvas</code>. 
+Code below present, how you can create simple scene and add it to render. </p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> scene <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CanvasBag.Scene</span>.Basic();
+    render.addScene(scene);</pre></div>
+
+<p>Nothing more is necessary to add <code>scene</code> to <code>canvas</code>. Now it is important to introduce methods of <code>SCENE</code> object.</p>
+
+<p><strong>Available <code>SCENE</code> methods</strong></p>
+
+<ul>
+<li> <code>addShape(shape: BasicShapePrototype)</code> - Add all objects that extends BasicShapePrototype. Currently <code>circle</code>, <code>rectangle</code>, <code>triangle</code>, <code>custom shape</code>.</li>
+<li> <code>addContainer(container: BasicContainerPrototype)</code>
+</li>
+<li> <code>addSprite(sprite: BasicSpritePrototype)</code> - Add <code>image</code> or <code>text</code> directly to scene.</li>
+<li> <code>addConnection(connection: BasicConnectionPrototype)</code>
+</li>
+<li> <code>removeConnectionById(connectionId: string)</code>
+</li>
+<li> <code>getNodeById(nodeId: string):CanvasBag.Node</code> - Every object of scene has automatically generated UUID. You can select any object in scene throught this ID and change its properties. All nodes in scene are accessible throught <code>Node</code> interface.</li>
+<li> <code>getConnectionById(connectionId: string):BasicConnectionPrototype</code> - Same behaviour like getNodeById method, but for connections.</li>
+<li> <code>getAllConnections():Array&lt;BasicConnectionPrototype&gt;</code>
+</li>
+<li> <code>getAllSprites():Array&lt;BasicSpritePrototype&gt;</code>
+</li>
+<li> <code>toJSON():string</code> - It is possible to convert whole scene to JSON object.</li>
+<li> `fromJSON(object: string) - It is possible to load definition of scene and of all nodes throught json.</li>
+<li> <code>invalidateScene()</code> - Cause re-render canvas as soon as possible.</li>
+</ul>
+
+<h3>
+<a id="containers" class="anchor" href="#containers" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONTAINERS</h3>
+
+<p>Will be described soon.</p>
+
+<h3>
+<a id="shapes" class="anchor" href="#shapes" aria-hidden="true"><span class="octicon octicon-link"></span></a>SHAPES</h3>
+
+<p>Will be described soon.</p>
+
+<h3>
+<a id="sprites" class="anchor" href="#sprites" aria-hidden="true"><span class="octicon octicon-link"></span></a>SPRITES</h3>
+
+<p>Will be described soon.</p>
+
+<h3>
+<a id="connections" class="anchor" href="#connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONNECTIONS</h3>
+
+<p>Will be described soon.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Xrew/CanvasBagTS/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Xrew/CanvasBagTS/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Xrew/CanvasBagTS"></a> is maintained by <a href="https://github.com/Xrew">Xrew</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
