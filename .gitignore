@@ -1,0 +1,10 @@
+.idea/*
+node_modules/*
+/**/*.map
+.idea/libraries/CanvasBagTS_node_modules.xml
+*.ts-316d683c5c3faa43dd7d74dad48ec3d5
+*.ts-75edb210452203c3ab25a714ab9276a7
+*.ts-1635407142174103a1fbc7324bbab3e0
+/**/*.ts
+*.ts*
+/dist-samples/*
