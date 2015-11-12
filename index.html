@@ -51,6 +51,8 @@
 
 <p>The only thing to connect <code>canvas</code> with <code>render</code> is the next part of code:</p>
 
+<p><strong><em>Example</em></strong></p>
+
 <div class="highlight highlight-source-js"><pre>     <span class="pl-k">var</span> canvas <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">"</span>connectionBasic1<span class="pl-pds">"</span></span>);
      <span class="pl-k">var</span> render <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CanvasBag.Render</span>();
      render.setCanvas(canvas);</pre></div>
@@ -71,6 +73,8 @@
 
 <p>Scene hold all others objects. All rendered objects in <code>canvas</code>. In present only <strong>one</strong> <code>scene</code> is permitted per <code>render</code> and <code>canvas</code>. 
 Code below present, how you can create simple scene and add it to render. </p>
+
+<p><strong><em>Example</em></strong></p>
 
 <div class="highlight highlight-source-ts"><pre>    <span class="pl-k">var</span> <span class="pl-v">scene</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.Scene.Basic();
     render.addScene(scene);</pre></div>
@@ -104,12 +108,14 @@ Code below present, how you can create simple scene and add it to render. </p>
 
 <p>Sometimes (almost always :-) ) it is necessarily to group compose simple objects to create something more interesting. It is possible throught containers. Container provides consistent behaviour of all added shapes for you. </p>
 
-<p><strong><em>Properties object</em></strong></p>
+<p><strong><em>Container properties</em></strong></p>
 
 <div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">BasicContainerProperties</span> {
         <span class="pl-v">name</span>: <span class="pl-k">string</span>;
         <span class="pl-v">position</span>: Point;
     }</pre></div>
+
+<p><strong><em>Example</em></strong></p>
 
 <div class="highlight highlight-source-ts"><pre>     <span class="pl-k">var</span> <span class="pl-v">containerBasic</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.BasicContainer.SimpleContainer();
      containerBasic.setProperties({
@@ -132,7 +138,7 @@ Code below present, how you can create simple scene and add it to render. </p>
 
 <p>I think this code is self-explaining. There is more examples in distribution package. Looks to <code>dist-samples</code> directory.</p>
 
-<p><strong>Available <code>SCENE</code> methods</strong></p>
+<p><strong>Available <code>CONTAINER</code> methods</strong></p>
 
 <ul>
 <li> <code>setProperties</code>
