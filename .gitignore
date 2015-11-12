@@ -5,7 +5,6 @@ dist/bundle-lib.js
 node_modules
 external-libs
 .tscache
-*.html
 *.map
 bower_components
 lib
