@@ -63,7 +63,7 @@
 <p>Scene hold all others objects. All rendered objects in <code>canvas</code>. In present only <strong>one</strong> <code>scene</code> is permitted per <code>render</code> and <code>canvas</code>. 
 Code below present, how you can create simple scene and add it to render. </p>
 
-<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> scene <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CanvasBag.Scene</span>.Basic();
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">var</span> <span class="pl-v">scene</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.Scene.Basic();
     render.addScene(scene);</pre></div>
 
 <p>Nothing more is necessary to add <code>scene</code> to <code>canvas</code>. Now it is important to introduce methods of <code>SCENE</code> object.</p>
@@ -71,10 +71,6 @@ Code below present, how you can create simple scene and add it to render. </p>
 <p><strong>Available <code>SCENE</code> methods</strong></p>
 
 <ul>
-<li> <code>setProperties</code>
-</li>
-<li> <code>getProperties</code>
-</li>
 <li> <code>addShape(shape: BasicShapePrototype)</code> - Add all objects that extends BasicShapePrototype. Currently <code>circle</code>, <code>rectangle</code>, <code>triangle</code>, <code>custom shape</code>.</li>
 <li> <code>addContainer(container: BasicContainerPrototype)</code>
 </li>
@@ -104,11 +100,9 @@ Code below present, how you can create simple scene and add it to render. </p>
 <div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">BasicContainerProperties</span> {
         <span class="pl-v">name</span>: <span class="pl-k">string</span>;
         <span class="pl-v">position</span>: Point;
-    }
-<span class="pl-s">```typescript</span>
-<span class="pl-s"></span>
-<span class="pl-s">```</span>javascript
-     <span class="pl-k">var</span> <span class="pl-v">containerBasic</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.BasicContainer.SimpleContainer();
+    }</pre></div>
+
+<div class="highlight highlight-source-ts"><pre>     <span class="pl-k">var</span> <span class="pl-v">containerBasic</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.BasicContainer.SimpleContainer();
      containerBasic.setProperties({
          name: <span class="pl-s">"containerBasic1"</span>,
          position: {x: <span class="pl-c1">500</span>, y: <span class="pl-c1">200</span>}
@@ -127,7 +121,7 @@ Code below present, how you can create simple scene and add it to render. </p>
      containerBasic.addShape(circle)
      scene.addContainer(containerBasic);</pre></div>
 
-<p>I thinh that this code is self-explaining. There is more examples in distribution package. Looks to <code>dist-samples</code> directory.</p>
+<p>I think this code is self-explaining. There is more examples in distribution package. Looks to <code>dist-samples</code> directory.</p>
 
 <p><strong>Available <code>SCENE</code> methods</strong></p>
 
@@ -149,7 +143,73 @@ Code below present, how you can create simple scene and add it to render. </p>
 <h3>
 <a id="shapes" class="anchor" href="#shapes" aria-hidden="true"><span class="octicon octicon-link"></span></a>SHAPES</h3>
 
-<p>Will be described soon.</p>
+<p>There are predefined basic shapes. <code>Circle</code>, <code>Rectangle</code>, <code>Triangle</code>. You can define your own shapes throught <code>custom shape</code>. All shapes extends <code>BasicShapeProperties</code></p>
+
+<p><strong><em>Common shapes properties</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">BasicShapeProperties</span> {
+        <span class="pl-v">position</span>: Point;
+        <span class="pl-v">width</span>: <span class="pl-k">number</span>;
+        <span class="pl-v">height</span>: <span class="pl-k">number</span>;
+        <span class="pl-v">borderColor</span>: Base.Color;
+        <span class="pl-v">backgroundColor</span><span class="pl-k">?</span>: Base.Color;
+        <span class="pl-v">borderWidth</span>: <span class="pl-k">number</span>;
+        <span class="pl-v">draggable</span>: <span class="pl-k">boolean</span>;
+        <span class="pl-v">joinable</span>: <span class="pl-k">boolean</span>;
+        <span class="pl-v">base64Background</span><span class="pl-k">?</span>: <span class="pl-k">string</span>;
+    }</pre></div>
+
+<p><strong><em>Circle properties</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">CircleShapeProperties</span> <span class="pl-k">extends</span> <span class="pl-k">BasicShapeProperties</span> {
+       <span class="pl-v">radius</span>: <span class="pl-k">number</span>;
+    }</pre></div>
+
+<p><strong><em>Rectangle properties</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">RectangleShapeProperties</span> <span class="pl-k">extends</span> <span class="pl-k">BasicShapeProperties</span> {
+    }</pre></div>
+
+<p><strong><em>Custom shape properties</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>   <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">CustomShapeProperties</span> <span class="pl-k">extends</span> <span class="pl-k">BasicShapeProperties</span> {
+       <span class="pl-v">points</span>: <span class="pl-en">Array</span>&lt;Point&gt;;
+   }</pre></div>
+
+<p><strong><em>Triangle properties</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">TriangleShapeProperties</span> <span class="pl-k">extends</span> <span class="pl-k">BasicShapeProperties</span> {
+       <span class="pl-v">points</span>: <span class="pl-en">Array</span>&lt;Point&gt;;
+    }</pre></div>
+
+<p>How to create a shape and add to scene is presented in <strong><em>SCENE</em></strong> chapter. </p>
+
+<p><strong>Available <code>SHAPES</code> methods</strong></p>
+
+<ul>
+<li> <code>setProperties</code>
+</li>
+<li> <code>getProperties</code>
+</li>
+<li> <code>contains</code>
+</li>
+<li> <code>move</code>
+</li>
+<li> <code>setOnClickListener</code>
+</li>
+<li> <code>click</code>
+</li>
+<li> <code>isDraggable</code>
+</li>
+<li> <code>setDraggable</code>
+</li>
+<li> <code>isJoinAble</code>
+</li>
+<li> <code>setJoinAble</code>
+</li>
+<li> <code>setBackgroundImage</code>
+</li>
+</ul>
 
 <h3>
 <a id="sprites" class="anchor" href="#sprites" aria-hidden="true"><span class="octicon octicon-link"></span></a>SPRITES</h3>
