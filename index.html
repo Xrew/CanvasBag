@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>CanvasBag by Xrew</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>CanvasBag by Xrew</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>CanvasBag</h1>
-        <h2>Canvas oriented library to easy render complex graphics in your web applications.</h2>
-        <a href="https://github.com/Xrew/CanvasBagTS" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">CanvasBag</h1>
+      <h2 class="project-tagline">Open source canvas oriented library to easy render complex graphics in your web applications.</h2>
+      <a href="https://github.com/Xrew/CanvasBag" class="btn">View on GitHub</a>
+      <a href="https://github.com/Xrew/CanvasBag/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Xrew/CanvasBag/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
+    <section class="main-content">
+      <h3>
 <a id="welcome-to-canvasbag-pages" class="anchor" href="#welcome-to-canvasbag-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to CanvasBag Pages.</h3>
 
 <p>CanvasBag graphic library written in TypeScript is your way to create application easy and quickly. It provides toolkit of basic shapes like circle, rectangle, triangle or custom shapes defined by points in array. You can compose more complex object with containers. <strong>It's in your hands!</strong></p>
@@ -80,6 +71,10 @@ Code below present, how you can create simple scene and add it to render. </p>
 <p><strong>Available <code>SCENE</code> methods</strong></p>
 
 <ul>
+<li> <code>setProperties</code>
+</li>
+<li> <code>getProperties</code>
+</li>
 <li> <code>addShape(shape: BasicShapePrototype)</code> - Add all objects that extends BasicShapePrototype. Currently <code>circle</code>, <code>rectangle</code>, <code>triangle</code>, <code>custom shape</code>.</li>
 <li> <code>addContainer(container: BasicContainerPrototype)</code>
 </li>
@@ -102,7 +97,54 @@ Code below present, how you can create simple scene and add it to render. </p>
 <h3>
 <a id="containers" class="anchor" href="#containers" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONTAINERS</h3>
 
-<p>Will be described soon.</p>
+<p>Sometimes (almost always :-) ) it is necessarily to group compose simple objects to create something more interesting. It is possible throught containers. Container provides consistent behaviour of all added shapes for you. </p>
+
+<p><strong><em>Properties object</em></strong></p>
+
+<div class="highlight highlight-source-ts"><pre>    <span class="pl-k">export</span> <span class="pl-k">interface</span> <span class="pl-en">BasicContainerProperties</span> {
+        <span class="pl-v">name</span>: <span class="pl-k">string</span>;
+        <span class="pl-v">position</span>: Point;
+    }
+<span class="pl-s">```typescript</span>
+<span class="pl-s"></span>
+<span class="pl-s">```</span>javascript
+     <span class="pl-k">var</span> <span class="pl-v">containerBasic</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.BasicContainer.SimpleContainer();
+     containerBasic.setProperties({
+         name: <span class="pl-s">"containerBasic1"</span>,
+         position: {x: <span class="pl-c1">500</span>, y: <span class="pl-c1">200</span>}
+     });
+
+     <span class="pl-k">var</span> <span class="pl-v">circle</span> <span class="pl-k">=</span> <span class="pl-k">new</span> CanvasBag.BasicShapes.Circle();
+     circle.setBaseProperties({
+         position: {x: <span class="pl-c1">0</span>, y: <span class="pl-c1">0</span>},
+         radius: <span class="pl-c1">5</span>,
+         borderColor: <span class="pl-s">'green'</span>,
+         borderWidth: <span class="pl-c1">1</span>,
+         backgroundColor: <span class="pl-s">'blue'</span>,
+         draggable: <span class="pl-c1">false</span>
+     });
+
+     containerBasic.addShape(circle)
+     scene.addContainer(containerBasic);</pre></div>
+
+<p>I thinh that this code is self-explaining. There is more examples in distribution package. Looks to <code>dist-samples</code> directory.</p>
+
+<p><strong>Available <code>SCENE</code> methods</strong></p>
+
+<ul>
+<li> <code>setProperties</code>
+</li>
+<li> <code>getProperties</code>
+</li>
+<li> <code>contains</code>
+</li>
+<li> <code>move</code>
+</li>
+<li> <code>addElement</code>
+</li>
+<li> <code>getElements</code>
+</li>
+</ul>
 
 <h3>
 <a id="shapes" class="anchor" href="#shapes" aria-hidden="true"><span class="octicon octicon-link"></span></a>SHAPES</h3>
@@ -118,24 +160,14 @@ Code below present, how you can create simple scene and add it to render. </p>
 <a id="connections" class="anchor" href="#connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONNECTIONS</h3>
 
 <p>Will be described soon.</p>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/Xrew/CanvasBagTS/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/Xrew/CanvasBagTS/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Xrew/CanvasBag">CanvasBag</a> is maintained by <a href="https://github.com/Xrew">Xrew</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/Xrew/CanvasBagTS"></a> is maintained by <a href="https://github.com/Xrew">Xrew</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
   
   </body>
