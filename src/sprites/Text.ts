@@ -13,39 +13,43 @@ module CanvasBag {
             height: number;
         }
 
-
         export class Text extends BasicSpritePrototype {
             constructor() {
                 super();
-                this.setType(SpriteType.TEXT)
+                this.type = SpriteType.TEXT;
             }
 
             setProperties(properties:TextSpriteProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             getProperties():TextSpriteProperties {
-                return <TextSpriteProperties>this.getBaseProperties();
+                return <TextSpriteProperties>this.properties;
             };
 
             contains(point:Point):boolean {
-                var properties = this.getProperties();
-                var renderOffset = this.getRenderOffset();
+                let properties = <TextSpriteProperties>this.properties;
+                let renderOffset = this.getRenderOffset();
 
-                var centerX = properties.position.x + renderOffset.x;
-                var centerY = properties.position.y + renderOffset.y;
-                var offsetX = properties.width / 2;
-                var offsetY = properties.height / 2;
+                let centerX = properties.position.x + renderOffset.x;
+                let centerY = properties.position.y + renderOffset.y;
+                let offsetX = properties.width / 2;
+                let offsetY = properties.height / 2;
 
                 return (centerX - offsetX <= point.x && centerX + offsetX >= point.x && centerY + offsetY >= point.y && centerY - offsetY <= point.y);
             };
 
             move(offsetX:number, offsetY:number) {
-                var properties = this.getProperties();
+                var properties = this.properties;
 
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
+
+            public setContent(content:string) {
+                let properties = <TextSpriteProperties>this.properties;
+                properties.content = content;
+            }
         }
     }
 }

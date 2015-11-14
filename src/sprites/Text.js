@@ -15,18 +15,18 @@ var CanvasBag;
             __extends(Text, _super);
             function Text() {
                 _super.call(this);
-                this.setType(CanvasBag.SpriteType.TEXT);
+                this.type = CanvasBag.SpriteType.TEXT;
             }
             Text.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Text.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Text.prototype.contains = function (point) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 var centerX = properties.position.x + renderOffset.x;
                 var centerY = properties.position.y + renderOffset.y;
@@ -36,11 +36,15 @@ var CanvasBag;
             };
             ;
             Text.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
             ;
+            Text.prototype.setContent = function (content) {
+                var properties = this.properties;
+                properties.content = content;
+            };
             return Text;
         })(CanvasBag.BasicSpritePrototype);
         Sprites.Text = Text;

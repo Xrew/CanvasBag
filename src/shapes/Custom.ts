@@ -12,25 +12,25 @@ module CanvasBag {
         export class Custom extends BasicShapePrototype {
             constructor() {
                 super();
-                this.setType(ShapeType.CUSTOM_SHAPE)
+                this.type = ShapeType.CUSTOM_SHAPE;
             }
 
             setProperties(properties: CustomShapeProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             getProperties():CustomShapeProperties{
-                return <CustomShapeProperties>this.getBaseProperties();
+                return <CustomShapeProperties>this.properties;
             };
 
             contains(point):boolean{
                 return PolygonUtils.pointInPolygon(
-                    point, PolygonUtils.addOffsetToPoints((<CustomShapeProperties>this.getBaseProperties()).points, this.getRenderOffset())
+                    point, PolygonUtils.addOffsetToPoints((<CustomShapeProperties>this.properties).points, this.getRenderOffset())
                 )
             };
 
             move(offsetX, offsetY){
-                var properties = <CustomShapeProperties> this.getBaseProperties();
+                var properties = <CustomShapeProperties> this.properties;
                 for (var i = 0; i < properties.points.length; i++) {
                     properties.points[i].x += offsetX;
                     properties.points[i].y += offsetY;

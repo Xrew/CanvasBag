@@ -14,38 +14,38 @@ module CanvasBag {
 
             constructor() {
                 super();
-                this.setType(SpriteType.IMAGE)
+                this.type = SpriteType.IMAGE;
             }
 
             setProperties(properties:ImageSpriteProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             getProperties():ImageSpriteProperties {
-                return <ImageSpriteProperties>this.getBaseProperties();
+                return <ImageSpriteProperties>this.properties;
             };
 
             contains(point):boolean {
-                var properties = <ImageSpriteProperties>this.getBaseProperties();
-                var renderOffset = this.getRenderOffset();
+                let properties = <ImageSpriteProperties>this.properties;
+                let renderOffset = this.getRenderOffset();
 
-                var centerX = properties.position.x + renderOffset.x;
-                var centerY = properties.position.y + renderOffset.y;
-                var offsetX = properties.width / 2;
-                var offsetY = properties.height / 2;
+                let centerX = properties.position.x + renderOffset.x;
+                let centerY = properties.position.y + renderOffset.y;
+                let offsetX = properties.width / 2;
+                let offsetY = properties.height / 2;
 
                 return (centerX - offsetX <= point.x && centerX + offsetX >= point.x && centerY + offsetY >= point.y && centerY - offsetY <= point.y);
             };
 
             move(offsetX, offsetY) {
-                var properties = <ImageSpriteProperties>this.getProperties();
+                let properties = <ImageSpriteProperties>this.properties;
 
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
 
             public setBackgroundImage = (imageData:string) => {
-                (<ImageSpriteProperties>this.getBaseProperties()).imageData = imageData;
+                (<ImageSpriteProperties>this.properties).imageData = imageData;
             };
         }
     }

@@ -13,15 +13,15 @@ module CanvasBag {
         export class Triangle extends BasicShapePrototype {
             constructor() {
                 super();
-                this.setType(ShapeType.TRIANGLE)
+                this.type = ShapeType.TRIANGLE;
             }
 
             setProperties(properties:TriangleShapeProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             getProperties():TriangleShapeProperties {
-                return <TriangleShapeProperties>this.getBaseProperties();
+                return <TriangleShapeProperties>this.properties;
             };
 
             contains(point):boolean {

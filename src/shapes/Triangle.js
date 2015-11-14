@@ -15,14 +15,14 @@ var CanvasBag;
             __extends(Triangle, _super);
             function Triangle() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.TRIANGLE);
+                this.type = CanvasBag.ShapeType.TRIANGLE;
             }
             Triangle.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Triangle.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Triangle.prototype.contains = function (point) {

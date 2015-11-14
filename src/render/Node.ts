@@ -3,7 +3,6 @@
 
 module CanvasBag {
     export interface Node {
-        id: string;
         getType():any;
         setProperties(properties: any);
         getProperties(): any;

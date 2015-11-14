@@ -15,22 +15,22 @@ var CanvasBag;
             __extends(Custom, _super);
             function Custom() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.CUSTOM_SHAPE);
+                this.type = CanvasBag.ShapeType.CUSTOM_SHAPE;
             }
             Custom.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Custom.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Custom.prototype.contains = function (point) {
-                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(this.getBaseProperties().points, this.getRenderOffset()));
+                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(this.properties.points, this.getRenderOffset()));
             };
             ;
             Custom.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 for (var i = 0; i < properties.points.length; i++) {
                     properties.points[i].x += offsetX;
                     properties.points[i].y += offsetY;

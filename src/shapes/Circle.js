@@ -16,25 +16,25 @@ var CanvasBag;
             __extends(Circle, _super);
             function Circle() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.CIRCLE);
+                this.type = CanvasBag.ShapeType.CIRCLE;
             }
             Circle.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Circle.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Circle.prototype.contains = function (point) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 return Math.pow(point.x - (properties.position.x + renderOffset.x), 2) +
                     Math.pow(point.y - (properties.position.y + renderOffset.y), 2) < Math.pow(properties.radius, 2);
             };
             ;
             Circle.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };

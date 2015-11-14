@@ -16,20 +16,20 @@ var CanvasBag;
                 var _this = this;
                 _super.call(this);
                 this.setBackgroundImage = function (imageData) {
-                    _this.getBaseProperties().imageData = imageData;
+                    _this.properties.imageData = imageData;
                 };
-                this.setType(CanvasBag.SpriteType.IMAGE);
+                this.type = CanvasBag.SpriteType.IMAGE;
             }
             Image.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Image.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Image.prototype.contains = function (point) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 var centerX = properties.position.x + renderOffset.x;
                 var centerY = properties.position.y + renderOffset.y;
@@ -39,7 +39,7 @@ var CanvasBag;
             };
             ;
             Image.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };

@@ -13,26 +13,26 @@ module CanvasBag {
         export class Circle extends BasicShapePrototype  {
             constructor() {
                 super();
-                this.setType(ShapeType.CIRCLE)
+                this.type=ShapeType.CIRCLE;
             }
 
             setProperties (properties: CircleShapeProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             getProperties ():CircleShapeProperties {
-                return <CircleShapeProperties>this.getBaseProperties();
+                return <CircleShapeProperties>this.properties;
             };
 
             contains(point: Point):boolean {
-                var properties : CircleShapeProperties = <CircleShapeProperties> this.getBaseProperties();
-                var renderOffset = this.getRenderOffset();
+                let properties : CircleShapeProperties = <CircleShapeProperties> this.properties;
+                let renderOffset = this.getRenderOffset();
                 return Math.pow(point.x - (properties.position.x + renderOffset.x), 2) +
                     Math.pow(point.y - (properties.position.y + renderOffset.y), 2) < Math.pow(properties.radius, 2);
             };
 
             move(offsetX, offsetY) {
-                var properties : CircleShapeProperties = <CircleShapeProperties> this.getBaseProperties();
+                let properties : CircleShapeProperties = <CircleShapeProperties> this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };

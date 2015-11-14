@@ -12,11 +12,11 @@ module CanvasBag {
     }
 
     export abstract class BasicSpritePrototype implements CanvasBag.Node {
-        private type:SpriteType;
-        public id:string;
-        private renderOffset:RenderOffset;
-        private onClickCallback:()=> void;
-        private properties:BasicSpriteProperties;
+        protected type:SpriteType;
+        protected id:string;
+        protected renderOffset:RenderOffset;
+        protected onClickCallback:()=> void;
+        protected properties:BasicSpriteProperties;
 
         constructor() {
             this.type = null;
@@ -37,18 +37,6 @@ module CanvasBag {
 
         public getType = ():SpriteType => {
             return this.type;
-        };
-
-        public  setType = (type:SpriteType) => {
-            this.type = type;
-        };
-
-        public getBaseProperties = ():BasicSpriteProperties => {
-            return this.properties;
-        };
-
-        public setBaseProperties = (properties:BasicSpriteProperties) => {
-            this.properties = properties;
         };
 
         public click = () => {

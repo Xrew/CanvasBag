@@ -21,11 +21,11 @@ module CanvasBag {
     }
 
     export abstract class BasicShapePrototype implements CanvasBag.Node {
-        private type: ShapeType;
-        public id: string;
-        private renderOffset: RenderOffset;
-        private onClickCallback: () => void;
-        private properties: BasicShapeProperties;
+        protected type: ShapeType;
+        protected id: string;
+        protected renderOffset: RenderOffset;
+        protected onClickCallback: () => void;
+        protected properties: BasicShapeProperties;
 
         public abstract getProperties():BasicShapeProperties;
         public abstract setProperties(properties: BasicShapeProperties);
@@ -45,18 +45,6 @@ module CanvasBag {
 
         public getType = () : ShapeType => {
             return this.type;
-        };
-
-        protected setType = (type: ShapeType) => {
-            this.type = type;
-        };
-
-        protected getBaseProperties = () : BasicShapeProperties => {
-            return this.properties;
-        };
-
-        protected setBaseProperties = (pProperties: BasicShapeProperties) => {
-            this.properties = pProperties;
         };
 
         public click = () => {

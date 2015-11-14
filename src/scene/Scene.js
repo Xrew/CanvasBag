@@ -131,7 +131,7 @@ var CanvasBag;
                                                 imported.fromJSON(node);
                                                 break;
                                             case CanvasBag.ContainerType.BASIC:
-                                                imported = new CanvasBag.BasicContainer.SimpleContainer();
+                                                imported = new BasicContainer.SimpleContainer();
                                                 imported.fromJSON(node);
                                                 break;
                                             default:
