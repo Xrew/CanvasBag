@@ -1,33 +1,36 @@
 ///<reference path="../render/Point" />
-///<reference path="../containers/ContainerType" />
+///<reference path="../primitives/containers/ContainerType" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
-///<reference path="../sprites/Image" />
-///<reference path="../sprites/Text" />
-///<reference path="../shapes/ShapeType" />
-///<reference path="../shapes/Circle" />
-///<reference path="../shapes/Custom" />
-///<reference path="../shapes/Rectangle" />
-///<reference path="../shapes/Triangle" />
+///<reference path="../primitives/sprites/Image" />
+///<reference path="../primitives/sprites/Text" />
+///<reference path="../primitives/shapes/ShapeType" />
+///<reference path="../primitives/shapes/Circle" />
+///<reference path="../primitives/shapes/Custom" />
+///<reference path="../primitives/shapes/Rectangle" />
+///<reference path="../primitives/shapes/Triangle" />
 ///<reference path="./SceneType" />
 ///<reference path="../render/Node" />
-///<reference path="../containers/BasicContainerPrototype.ts" />
-///<reference path="../shapes/BasicShapePrototype.ts" />
-///<reference path="../connections/BasicConnectionPrototype.ts" />
+///<reference path="../primitives/containers/SimpleContainer.ts" />
+///<reference path="../primitives/shapes/BasicShapePrototype.ts" />
+///<reference path="../primitives/connections/BasicConnectionPrototype.ts" />
 
 module CanvasBag {
     export module Scene {
-        export class Basic {
-            private id:string;
-            private type:SceneType;
-            private nodes:Array<CanvasBag.Node>;
-            private connections:Array<BasicConnectionPrototype>;
-            private sprites:Array<BasicSpritePrototype>;
-            private valid:boolean;
+        export interface BasicSceneProperties {
+        }
+
+        export class BasicScenePrototype {
+            protected id:string;
+            protected properties: BasicSceneProperties;
+            protected type:SceneType;
+            protected nodes:Array<CanvasBag.Node>;
+            protected connections:Array<BasicConnectionPrototype>;
+            protected sprites:Array<BasicSpritePrototype>;
+            protected valid:boolean;
 
             constructor() {
                 this.id = Guid.generate();
-                this.type = SceneType.BASIC;
                 this.nodes = [];
                 this.connections = [];
                 this.sprites = [];
@@ -41,10 +44,6 @@ module CanvasBag {
 
             public getType = ():SceneType => {
                 return this.type;
-            };
-
-            public setType = (type: SceneType) => {
-                this.type = type;
             };
 
             public invalidateScene = () => {

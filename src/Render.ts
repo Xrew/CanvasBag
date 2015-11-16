@@ -1,19 +1,19 @@
 ///<reference path="./render/RenderedPoint.ts" />
-///<reference path="./containers/ContainerType" />
-///<reference path="./sprites/SpriteType" />
-///<reference path="./shapes/ShapeType.ts" />
-///<reference path="./connections/ConnectionType" />
-///<reference path="./connections/SimpleConnection" />
-///<reference path="sprites/Text.ts" />
-///<reference path="scene/Scene.ts" />
-///<reference path="containers/SimpleContainer.ts" />
+///<reference path="primitives/containers/ContainerType" />
+///<reference path="primitives/sprites/SpriteType" />
+///<reference path="primitives/shapes/ShapeType.ts" />
+///<reference path="primitives/connections/ConnectionType" />
+///<reference path="primitives/connections/SimpleConnection" />
+///<reference path="primitives/sprites/Text.ts" />
+///<reference path="scene/SimpleScene.ts" />
+///<reference path="primitives/containers/SimpleContainer.ts" />
 
 module CanvasBag {
     export class Render {
         private RENDERING_INTERVAL:number = 40;
         private context:CanvasRenderingContext2D;
         private canvas:HTMLCanvasElement;
-        private scene:CanvasBag.Scene.Basic;
+        private scene:CanvasBag.Scene.BasicScenePrototype;
         private canvasValid:boolean;
 
         // Keep track when we are dragging

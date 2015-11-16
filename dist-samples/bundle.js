@@ -75,11 +75,11 @@ var CanvasBag;
     })(Base = CanvasBag.Base || (CanvasBag.Base = {}));
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="Point.ts" />
-///<reference path="../render/Point" />
+///<reference path="../../render/Point" />
 ///<reference path="./ConnectionType" />
-///<reference path="../utils/Guid" />
-///<reference path="../render/base/Color.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../utils/Guid" />
+///<reference path="../../render/base/Color.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicConnectionPrototype = (function () {
@@ -192,12 +192,12 @@ var CanvasBag;
     })();
     CanvasBag.ObjectUtils = ObjectUtils;
 })(CanvasBag || (CanvasBag = {}));
-///<reference path="../utils/Guid" />
-///<reference path="../utils/ObjectUtils" />
+///<reference path="../../utils/Guid" />
+///<reference path="../../utils/ObjectUtils" />
 ///<reference path="SpriteType.ts" />
 ///<reference path="../render/Point.ts" />
-///<reference path="../render/RenderOffset.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/RenderOffset.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicSpritePrototype = (function () {
@@ -208,15 +208,6 @@ var CanvasBag;
             };
             this.getType = function () {
                 return _this.type;
-            };
-            this.setType = function (type) {
-                _this.type = type;
-            };
-            this.getBaseProperties = function () {
-                return _this.properties;
-            };
-            this.setBaseProperties = function (properties) {
-                _this.properties = properties;
             };
             this.click = function () {
                 _this.onClickCallback();
@@ -299,7 +290,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 ///<reference path="../render/base/Font.ts" />
 var CanvasBag;
 (function (CanvasBag) {
@@ -309,18 +300,18 @@ var CanvasBag;
             __extends(Text, _super);
             function Text() {
                 _super.call(this);
-                this.setType(CanvasBag.SpriteType.TEXT);
+                this.type = CanvasBag.SpriteType.TEXT;
             }
             Text.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Text.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Text.prototype.contains = function (point) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 var centerX = properties.position.x + renderOffset.x;
                 var centerY = properties.position.y + renderOffset.y;
@@ -330,11 +321,15 @@ var CanvasBag;
             };
             ;
             Text.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
             ;
+            Text.prototype.setContent = function (content) {
+                var properties = this.properties;
+                properties.content = content;
+            };
             return Text;
         })(CanvasBag.BasicSpritePrototype);
         Sprites.Text = Text;
@@ -342,7 +337,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Sprites;
@@ -353,20 +348,20 @@ var CanvasBag;
                 var _this = this;
                 _super.call(this);
                 this.setBackgroundImage = function (imageData) {
-                    _this.getBaseProperties().imageData = imageData;
+                    _this.properties.imageData = imageData;
                 };
-                this.setType(CanvasBag.SpriteType.IMAGE);
+                this.type = CanvasBag.SpriteType.IMAGE;
             }
             Image.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Image.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Image.prototype.contains = function (point) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 var centerX = properties.position.x + renderOffset.x;
                 var centerY = properties.position.y + renderOffset.y;
@@ -376,7 +371,7 @@ var CanvasBag;
             };
             ;
             Image.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
@@ -386,13 +381,13 @@ var CanvasBag;
         Sprites.Image = Image;
     })(Sprites = CanvasBag.Sprites || (CanvasBag.Sprites = {}));
 })(CanvasBag || (CanvasBag = {}));
-///<reference path="../utils/Guid" />
+///<reference path="../../utils/Guid" />
 ///<reference path="./ShapeType" />
-///<reference path="../utils/ObjectUtils" />
-///<reference path="../render/RenderOffset.ts" />
-///<reference path="../render/base/Color.ts" />
+///<reference path="../../utils/ObjectUtils" />
+///<reference path="../../render/RenderOffset.ts" />
+///<reference path="../../render/base/Color.ts" />
 ///<reference path="../render/Point.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicShapePrototype = (function () {
@@ -403,15 +398,6 @@ var CanvasBag;
             };
             this.getType = function () {
                 return _this.type;
-            };
-            this.setType = function (type) {
-                _this.type = type;
-            };
-            this.getBaseProperties = function () {
-                return _this.properties;
-            };
-            this.setBaseProperties = function (pProperties) {
-                _this.properties = pProperties;
             };
             this.click = function () {
                 _this.onClickCallback();
@@ -491,7 +477,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 ///<reference path="../render/Point.ts" />
 ///<reference path="BasicShapePrototype.ts" />
 var CanvasBag;
@@ -502,25 +488,25 @@ var CanvasBag;
             __extends(Circle, _super);
             function Circle() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.CIRCLE);
+                this.type = CanvasBag.ShapeType.CIRCLE;
             }
             Circle.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Circle.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Circle.prototype.contains = function (point) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 return Math.pow(point.x - (properties.position.x + renderOffset.x), 2) +
                     Math.pow(point.y - (properties.position.y + renderOffset.y), 2) < Math.pow(properties.radius, 2);
             };
             ;
             Circle.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
@@ -555,7 +541,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 ///<reference path="../utils/PolygonUtils" />
 var CanvasBag;
 (function (CanvasBag) {
@@ -565,22 +551,22 @@ var CanvasBag;
             __extends(Custom, _super);
             function Custom() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.CUSTOM_SHAPE);
+                this.type = CanvasBag.ShapeType.CUSTOM_SHAPE;
             }
             Custom.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Custom.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Custom.prototype.contains = function (point) {
-                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(this.getBaseProperties().points, this.getRenderOffset()));
+                return CanvasBag.PolygonUtils.pointInPolygon(point, CanvasBag.PolygonUtils.addOffsetToPoints(this.properties.points, this.getRenderOffset()));
             };
             ;
             Custom.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 for (var i = 0; i < properties.points.length; i++) {
                     properties.points[i].x += offsetX;
                     properties.points[i].y += offsetY;
@@ -594,7 +580,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicShapes;
@@ -603,18 +589,18 @@ var CanvasBag;
             __extends(Rectangle, _super);
             function Rectangle() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.RECTANGLE);
+                this.type = CanvasBag.ShapeType.RECTANGLE;
             }
             Rectangle.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Rectangle.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Rectangle.prototype.contains = function (point) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 var renderOffset = this.getRenderOffset();
                 var centerX = properties.position.x + renderOffset.x;
                 var centerY = properties.position.y + renderOffset.y;
@@ -624,7 +610,7 @@ var CanvasBag;
             };
             ;
             Rectangle.prototype.move = function (offsetX, offsetY) {
-                var properties = this.getBaseProperties();
+                var properties = this.properties;
                 properties.position.x += offsetX;
                 properties.position.y += offsetY;
             };
@@ -636,7 +622,7 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 ///<reference path="../utils/PolygonUtils" />
 var CanvasBag;
 (function (CanvasBag) {
@@ -646,14 +632,14 @@ var CanvasBag;
             __extends(Triangle, _super);
             function Triangle() {
                 _super.call(this);
-                this.setType(CanvasBag.ShapeType.TRIANGLE);
+                this.type = CanvasBag.ShapeType.TRIANGLE;
             }
             Triangle.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             Triangle.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             Triangle.prototype.contains = function (point) {
@@ -683,14 +669,14 @@ var CanvasBag;
     })();
     CanvasBag.SceneType = SceneType;
 })(CanvasBag || (CanvasBag = {}));
-///<reference path="../render/Point" />
-///<reference path="../utils/ObjectUtils" />
-///<reference path="../utils/Guid" />
+///<reference path="../../render/Point" />
+///<reference path="../../utils/ObjectUtils" />
+///<reference path="../../utils/Guid" />
 ///<reference path="../sprites/Image" />
 ///<reference path="../sprites/Text" />
 ///<reference path="../shapes/ShapeType" />
 ///<reference path="ContainerType.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicContainerPrototype = (function () {
@@ -701,12 +687,6 @@ var CanvasBag;
             };
             this.getId = function () {
                 return _this.id;
-            };
-            this.setBaseProperties = function (properties) {
-                _this.properties = properties;
-            };
-            this.getBaseProperties = function () {
-                return _this.properties;
             };
             this.detectInnerElement = function (point) {
                 for (var i = 0; i < _this.elements.length; i++) {
@@ -723,70 +703,6 @@ var CanvasBag;
             this.getElements = function () {
                 return _this.elements;
             };
-            this.toJSON = function () {
-                return {
-                    id: _this.id,
-                    type: _this.type,
-                    elements: _this.elements,
-                    properties: _this.properties
-                };
-            };
-            this.fromJSON = function (json) {
-                //if (!ObjectUtils.hasDefinedProperty(json, 'id')) {
-                //    json.id = Guid.generate();
-                //    this.printWarningBasicContainer("ID");
-                //}
-                //this.id = json.id;
-                //this.type = json.type;
-                //
-                //if (!ObjectUtils.hasDefinedProperty(json, 'elements')) {
-                //    json.elements = [];
-                //    this.printWarningBasicContainer("elements");
-                //}
-                //
-                //json.elements.forEach((element) => {
-                //    if (!ObjectUtils.hasDefinedProperty(element, 'type')) {
-                //        this.printErrorBasicContainer("Type of node is not defined");
-                //        throw "NodeType error"
-                //    }
-                //    var imported = null;
-                //    switch (element.type) {
-                //        case ShapeType.RECTANGLE:
-                //            imported = new BasicShapes.Rectangle();
-                //            break;
-                //        case ShapeType.CIRCLE:
-                //            imported = new BasicShapes.Circle();
-                //            break;
-                //        case ShapeType.TRIANGLE:
-                //            imported = new BasicShapes.Triangle();
-                //            break;
-                //        case ShapeType.CUSTOM_SHAPE:
-                //            imported = new BasicShapes.Custom();
-                //            break;
-                //        case ContainerType.BASIC:
-                //            imported = new BasicContainer.SimpleContainer();
-                //            break;
-                //        case SpriteType.IMAGE:
-                //            imported = new Sprites.Image();
-                //            break;
-                //        case SpriteType.TEXT:
-                //            imported = new Sprites.Text();
-                //            break;
-                //        default:
-                //            this.printErrorBasicContainer("Unknown shape type.");
-                //            throw "NodeType error";
-                //    }
-                //    imported.fromJSON(element);
-                //    this.elements.push(imported)
-                //});
-                //
-                //if (!ObjectUtils.hasDefinedProperty(json, 'properties')) {
-                //    json.properties = null;
-                //    this.printWarningBasicContainer("properties");
-                //}
-                //this.properties = json.properties;
-                //return this;
-            };
             this.printWarningBasicContainer = function (msg) {
                 console.log("WARNING: " + " should be defined. Object is loaded from JSON, be careful.");
             };
@@ -798,17 +714,14 @@ var CanvasBag;
             this.elements = [];
             this.properties = null;
         }
-        BasicContainerPrototype.prototype.setType = function (type) {
-            this.type = type;
-        };
         return BasicContainerPrototype;
     })();
     CanvasBag.BasicContainerPrototype = BasicContainerPrototype;
 })(CanvasBag || (CanvasBag = {}));
-///<reference path="../render/Point" />
+///<reference path="../../render/Point" />
 ///<reference path="../containers/ContainerType" />
-///<reference path="../utils/ObjectUtils" />
-///<reference path="../utils/Guid" />
+///<reference path="../../utils/ObjectUtils" />
+///<reference path="../../utils/Guid" />
 ///<reference path="../sprites/Image" />
 ///<reference path="../sprites/Text" />
 ///<reference path="../shapes/ShapeType" />
@@ -992,6 +905,10 @@ var CanvasBag;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="BasicContainerPrototype.ts" />
 ///<reference path="ContainerType.ts" />
+///<reference path="../shapes/Circle.ts"/>
+///<reference path="../shapes/Rectangle.ts"/>
+///<reference path="../shapes/Triangle.ts"/>
+///<reference path="../shapes/Custom.ts"/>
 var CanvasBag;
 (function (CanvasBag) {
     var BasicContainer;
@@ -1000,21 +917,85 @@ var CanvasBag;
             __extends(SimpleContainer, _super);
             function SimpleContainer() {
                 _super.call(this);
-                this.setType(CanvasBag.ContainerType.BASIC);
+                this.type = CanvasBag.ContainerType.BASIC;
             }
             SimpleContainer.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             SimpleContainer.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             SimpleContainer.prototype.contains = function (point) {
                 return this.detectInnerElement(point) !== null;
             };
             SimpleContainer.prototype.move = function (offsetX, offsetY) {
-                this.getBaseProperties().position.x += offsetX;
-                this.getBaseProperties().position.y += offsetY;
+                this.properties.position.x += offsetX;
+                this.properties.position.y += offsetY;
             };
+            SimpleContainer.prototype.toJSON = function () {
+                return {
+                    id: this.id,
+                    type: this.type,
+                    elements: this.elements,
+                    properties: this.properties
+                };
+            };
+            ;
+            SimpleContainer.prototype.fromJSON = function (json) {
+                var _this = this;
+                if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'id')) {
+                    json.id = CanvasBag.Guid.generate();
+                    this.printWarningBasicContainer("ID");
+                }
+                this.id = json.id;
+                this.type = json.type;
+                if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'elements')) {
+                    json.elements = [];
+                    this.printWarningBasicContainer("elements");
+                }
+                json.elements.forEach(function (element) {
+                    if (!CanvasBag.ObjectUtils.hasDefinedProperty(element, 'type')) {
+                        _this.printErrorBasicContainer("Type of node is not defined");
+                        throw "NodeType error";
+                    }
+                    var imported = null;
+                    switch (element.type) {
+                        case CanvasBag.ShapeType.RECTANGLE:
+                            imported = new CanvasBag.BasicShapes.Rectangle();
+                            break;
+                        case CanvasBag.ShapeType.CIRCLE:
+                            imported = new CanvasBag.BasicShapes.Circle();
+                            break;
+                        case CanvasBag.ShapeType.TRIANGLE:
+                            imported = new CanvasBag.BasicShapes.Triangle();
+                            break;
+                        case CanvasBag.ShapeType.CUSTOM_SHAPE:
+                            imported = new CanvasBag.BasicShapes.Custom();
+                            break;
+                        case CanvasBag.ContainerType.BASIC:
+                            imported = new BasicContainer.SimpleContainer();
+                            break;
+                        case CanvasBag.SpriteType.IMAGE:
+                            imported = new CanvasBag.Sprites.Image();
+                            break;
+                        case CanvasBag.SpriteType.TEXT:
+                            imported = new CanvasBag.Sprites.Text();
+                            break;
+                        default:
+                            _this.printErrorBasicContainer("Unknown shape type.");
+                            throw "NodeType error";
+                    }
+                    imported.fromJSON(element);
+                    _this.elements.push(imported);
+                });
+                if (!CanvasBag.ObjectUtils.hasDefinedProperty(json, 'properties')) {
+                    json.properties = null;
+                    this.printWarningBasicContainer("properties");
+                }
+                this.properties = json.properties;
+                return this;
+            };
+            ;
             return SimpleContainer;
         })(CanvasBag.BasicContainerPrototype);
         BasicContainer.SimpleContainer = SimpleContainer;

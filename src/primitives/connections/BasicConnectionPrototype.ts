@@ -1,8 +1,8 @@
-///<reference path="../render/Point" />
+///<reference path="../../render/Point" />
 ///<reference path="./ConnectionType" />
-///<reference path="../utils/Guid" />
-///<reference path="../render/base/Color.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../utils/Guid" />
+///<reference path="../../render/base/Color.ts" />
+///<reference path="../../render/Node.ts" />
 
 
 module CanvasBag {

@@ -1,11 +1,11 @@
-///<reference path="../render/Point" />
-///<reference path="../utils/ObjectUtils" />
-///<reference path="../utils/Guid" />
+///<reference path="../../render/Point" />
+///<reference path="../../utils/ObjectUtils" />
+///<reference path="../../utils/Guid" />
 ///<reference path="../sprites/Image" />
 ///<reference path="../sprites/Text" />
 ///<reference path="../shapes/ShapeType" />
 ///<reference path="ContainerType.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 
 
 module CanvasBag {

@@ -1,7 +1,7 @@
 ///<reference path="./SpriteType" />
 ///<reference path="./BasicSpritePrototype" />
-///<reference path="../render/Node.ts" />
-///<reference path="../render/base/Font.ts" />
+///<reference path="../../render/Node.ts" />
+///<reference path="../../render/base/Font.ts" />
 
 module CanvasBag {
     export module Sprites {

@@ -1,34 +1,31 @@
 ///<reference path="../render/Point" />
-///<reference path="../containers/ContainerType" />
+///<reference path="../primitives/containers/ContainerType" />
 ///<reference path="../utils/ObjectUtils" />
 ///<reference path="../utils/Guid" />
-///<reference path="../sprites/Image" />
-///<reference path="../sprites/Text" />
-///<reference path="../shapes/ShapeType" />
-///<reference path="../shapes/Circle" />
-///<reference path="../shapes/Custom" />
-///<reference path="../shapes/Rectangle" />
-///<reference path="../shapes/Triangle" />
+///<reference path="../primitives/sprites/Image" />
+///<reference path="../primitives/sprites/Text" />
+///<reference path="../primitives/shapes/ShapeType" />
+///<reference path="../primitives/shapes/Circle" />
+///<reference path="../primitives/shapes/Custom" />
+///<reference path="../primitives/shapes/Rectangle" />
+///<reference path="../primitives/shapes/Triangle" />
 ///<reference path="./SceneType" />
 ///<reference path="../render/Node" />
-///<reference path="../containers/BasicContainerPrototype.ts" />
-///<reference path="../shapes/BasicShapePrototype.ts" />
-///<reference path="../connections/BasicConnectionPrototype.ts" />
+///<reference path="../primitives/containers/SimpleContainer.ts" />
+///<reference path="../primitives/shapes/BasicShapePrototype.ts" />
+///<reference path="../primitives/connections/BasicConnectionPrototype.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var Scene;
     (function (Scene) {
-        var Basic = (function () {
-            function Basic() {
+        var BasicScenePrototype = (function () {
+            function BasicScenePrototype() {
                 var _this = this;
                 this.getId = function () {
                     return _this.id;
                 };
                 this.getType = function () {
                     return _this.type;
-                };
-                this.setType = function (type) {
-                    _this.type = type;
                 };
                 this.invalidateScene = function () {
                     _this.valid = false;
@@ -131,7 +128,7 @@ var CanvasBag;
                                                 imported.fromJSON(node);
                                                 break;
                                             case CanvasBag.ContainerType.BASIC:
-                                                imported = new BasicContainer.SimpleContainer();
+                                                imported = new CanvasBag.BasicContainer.SimpleContainer();
                                                 imported.fromJSON(node);
                                                 break;
                                             default:
@@ -172,15 +169,14 @@ var CanvasBag;
                     console.log("Defined JSON of scene is not valid. " + msg);
                 };
                 this.id = CanvasBag.Guid.generate();
-                this.type = CanvasBag.SceneType.BASIC;
                 this.nodes = [];
                 this.connections = [];
                 this.sprites = [];
                 this.valid = false;
             }
-            return Basic;
+            return BasicScenePrototype;
         })();
-        Scene.Basic = Basic;
+        Scene.BasicScenePrototype = BasicScenePrototype;
     })(Scene = CanvasBag.Scene || (CanvasBag.Scene = {}));
 })(CanvasBag || (CanvasBag = {}));
-//# sourceMappingURL=Scene.js.map
+//# sourceMappingURL=BasicScenePrototype.js.map

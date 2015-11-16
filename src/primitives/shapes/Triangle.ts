@@ -1,7 +1,7 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
-///<reference path="../utils/PolygonUtils" />
+///<reference path="../../render/Node.ts" />
+///<reference path="../../utils/PolygonUtils" />
 
 module CanvasBag {
     export module BasicShapes {

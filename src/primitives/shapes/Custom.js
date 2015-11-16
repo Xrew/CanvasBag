@@ -1,7 +1,7 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
-///<reference path="../utils/PolygonUtils" />
+///<reference path="../../render/Node.ts" />
+///<reference path="../../utils/PolygonUtils" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }

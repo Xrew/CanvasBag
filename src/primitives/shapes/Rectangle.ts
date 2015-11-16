@@ -1,6 +1,6 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Node.ts" />
 
 module CanvasBag {
     export module BasicShapes {

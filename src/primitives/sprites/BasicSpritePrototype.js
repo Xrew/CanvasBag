@@ -1,9 +1,9 @@
-///<reference path="../utils/Guid" />
-///<reference path="../utils/ObjectUtils" />
+///<reference path="../../utils/Guid" />
+///<reference path="../../utils/ObjectUtils" />
 ///<reference path="SpriteType.ts" />
-///<reference path="../render/Point.ts" />
-///<reference path="../render/RenderOffset.ts" />
-///<reference path="../render/Node.ts" />
+///<reference path="../../render/Point.ts" />
+///<reference path="../../render/RenderOffset.ts" />
+///<reference path="../../render/Node.ts" />
 var CanvasBag;
 (function (CanvasBag) {
     var BasicSpritePrototype = (function () {

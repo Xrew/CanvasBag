@@ -1,7 +1,7 @@
 ///<reference path="./ShapeType" />
 ///<reference path="./BasicShapePrototype" />
-///<reference path="../render/Node.ts" />
-///<reference path="../render/Point.ts" />
+///<reference path="../../render/Node.ts" />
+///<reference path="../../render/Point.ts" />
 ///<reference path="BasicShapePrototype.ts" />
 
 module CanvasBag {
