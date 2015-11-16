@@ -14,15 +14,6 @@ var CanvasBag;
             this.getType = function () {
                 return _this.type;
             };
-            this.setType = function (type) {
-                _this.type = type;
-            };
-            this.getBaseProperties = function () {
-                return _this.properties;
-            };
-            this.setBaseProperties = function (properties) {
-                _this.properties = properties;
-            };
             this.setTemporaryEnd = function (pemporaryEnd) {
                 _this.temporaryEnd = pemporaryEnd;
             };

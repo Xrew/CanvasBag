@@ -10,15 +10,15 @@ module CanvasBag {
 
             constructor() {
                 super();
-                this.setType(ConnectionType.SIMPLE);
+                this.type = ConnectionType.SIMPLE;
             }
 
             getProperties():SimpleConnectionProperties {
-                return <SimpleConnectionProperties>this.getBaseProperties();
+                return <SimpleConnectionProperties>this.properties;
             };
 
             setProperties(properties:SimpleConnectionProperties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
 
             contains(point:Point):boolean {

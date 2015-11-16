@@ -13,14 +13,14 @@ var CanvasBag;
             __extends(SimpleConnection, _super);
             function SimpleConnection() {
                 _super.call(this);
-                this.setType(CanvasBag.ConnectionType.SIMPLE);
+                this.type = CanvasBag.ConnectionType.SIMPLE;
             }
             SimpleConnection.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             SimpleConnection.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             SimpleConnection.prototype.contains = function (point) {

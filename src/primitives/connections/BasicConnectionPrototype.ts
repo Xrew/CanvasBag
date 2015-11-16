@@ -23,12 +23,12 @@ module CanvasBag {
         }
 
         export abstract class BasicConnectionPrototype implements CanvasBag.Node {
-            public id:string;
-            private type:ConnectionType;
-            private properties:BasicConnectionProperties;
-            private onClickCallback:() => void;
-            private bindings:ConnectionBinding;
-            private temporaryEnd:Point;
+            protected id:string;
+            protected type:ConnectionType;
+            protected properties:BasicConnectionProperties;
+            protected onClickCallback:() => void;
+            protected bindings:ConnectionBinding;
+            protected temporaryEnd:Point;
 
             constructor() {
                 this.type = null;
@@ -50,18 +50,6 @@ module CanvasBag {
 
             public getType = ():ConnectionType => {
                 return this.type;
-            };
-
-            protected setType = (type:ConnectionType) => {
-                this.type = type;
-            };
-
-            protected getBaseProperties = ():BasicConnectionProperties => {
-                return this.properties;
-            };
-
-            protected setBaseProperties = (properties:BasicConnectionProperties) => {
-                this.properties = properties;
             };
 
             public click() {
