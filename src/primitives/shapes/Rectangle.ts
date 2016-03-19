@@ -5,6 +5,9 @@
 module CanvasBag {
     export module BasicShapes {
         export interface RectangleShapeProperties extends BasicShapeProperties {
+            position: Point;
+            width: number;
+            height: number;
         }
 
 
@@ -19,7 +22,7 @@ module CanvasBag {
             };
 
             getProperties():RectangleShapeProperties {
-                return <BasicShapeProperties>this.properties;
+                return <RectangleShapeProperties>this.properties;
             };
 
             contains(point):boolean {

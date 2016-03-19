@@ -9,9 +9,6 @@
 module CanvasBag {
 
     export interface BasicShapeProperties {
-        position: Point;
-        width: number;
-        height: number;
         borderColor: Base.Color;
         backgroundColor?: Base.Color;
         borderWidth: number;

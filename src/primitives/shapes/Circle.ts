@@ -7,6 +7,7 @@
 module CanvasBag {
     export module BasicShapes {
         export interface CircleShapeProperties extends BasicShapeProperties {
+            position: Point;
             radius: number;
         }
 

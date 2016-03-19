@@ -5,7 +5,7 @@ var CanvasBag;
         }
         ContainerType.BASIC = "CONTAINER_BASIC";
         return ContainerType;
-    })();
+    }());
     CanvasBag.ContainerType = ContainerType;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -16,7 +16,7 @@ var CanvasBag;
         SpriteType.IMAGE = "SPRITE_IMAGE";
         SpriteType.TEXT = "SPRITE_TEXT";
         return SpriteType;
-    })();
+    }());
     CanvasBag.SpriteType = SpriteType;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -30,7 +30,7 @@ var CanvasBag;
         ShapeType.CUSTOM_SHAPE = "SHAPE_CUSTOM_SHAPE";
         ShapeType.COMPLEX_SHAPE = "SHAPE_COMPLEX_SHAPE";
         return ShapeType;
-    })();
+    }());
     CanvasBag.ShapeType = ShapeType;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -40,7 +40,7 @@ var CanvasBag;
         }
         ConnectionType.SIMPLE = "CONNECTION_SIMPLE";
         return ConnectionType;
-    })();
+    }());
     CanvasBag.ConnectionType = ConnectionType;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -55,7 +55,7 @@ var CanvasBag;
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         };
         return Guid;
-    })();
+    }());
     CanvasBag.Guid = Guid;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -70,7 +70,7 @@ var CanvasBag;
             Color.BLUE = "blue";
             Color.RED = "red";
             return Color;
-        })();
+        }());
         Base.Color = Color;
     })(Base = CanvasBag.Base || (CanvasBag.Base = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -90,15 +90,6 @@ var CanvasBag;
             };
             this.getType = function () {
                 return _this.type;
-            };
-            this.setType = function (type) {
-                _this.type = type;
-            };
-            this.getBaseProperties = function () {
-                return _this.properties;
-            };
-            this.setBaseProperties = function (properties) {
-                _this.properties = properties;
             };
             this.setTemporaryEnd = function (pemporaryEnd) {
                 _this.temporaryEnd = pemporaryEnd;
@@ -140,7 +131,7 @@ var CanvasBag;
             return this.temporaryEnd;
         };
         return BasicConnectionPrototype;
-    })();
+    }());
     CanvasBag.BasicConnectionPrototype = BasicConnectionPrototype;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ConnectionType" />
@@ -158,14 +149,14 @@ var CanvasBag;
             __extends(SimpleConnection, _super);
             function SimpleConnection() {
                 _super.call(this);
-                this.setType(CanvasBag.ConnectionType.SIMPLE);
+                this.type = CanvasBag.ConnectionType.SIMPLE;
             }
             SimpleConnection.prototype.getProperties = function () {
-                return this.getBaseProperties();
+                return this.properties;
             };
             ;
             SimpleConnection.prototype.setProperties = function (properties) {
-                this.setBaseProperties(properties);
+                this.properties = properties;
             };
             ;
             SimpleConnection.prototype.contains = function (point) {
@@ -176,7 +167,7 @@ var CanvasBag;
                 throw "Method move is not supported in SimpleConnection yet.";
             };
             return SimpleConnection;
-        })(CanvasBag.BasicConnectionPrototype);
+        }(CanvasBag.BasicConnectionPrototype));
         Connections.SimpleConnection = SimpleConnection;
     })(Connections = CanvasBag.Connections || (CanvasBag.Connections = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -189,7 +180,7 @@ var CanvasBag;
             return object[key] !== undefined && object[key] !== null;
         };
         return ObjectUtils;
-    })();
+    }());
     CanvasBag.ObjectUtils = ObjectUtils;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="../../utils/Guid" />
@@ -272,7 +263,7 @@ var CanvasBag;
             this.properties = null;
         }
         return BasicSpritePrototype;
-    })();
+    }());
     CanvasBag.BasicSpritePrototype = BasicSpritePrototype;
 })(CanvasBag || (CanvasBag = {}));
 var CanvasBag;
@@ -284,7 +275,7 @@ var CanvasBag;
             }
             Font.ARIAL = "Arial";
             return Font;
-        })();
+        }());
         Base.Font = Font;
     })(Base = CanvasBag.Base || (CanvasBag.Base = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -331,7 +322,7 @@ var CanvasBag;
                 properties.content = content;
             };
             return Text;
-        })(CanvasBag.BasicSpritePrototype);
+        }(CanvasBag.BasicSpritePrototype));
         Sprites.Text = Text;
     })(Sprites = CanvasBag.Sprites || (CanvasBag.Sprites = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -377,7 +368,7 @@ var CanvasBag;
             };
             ;
             return Image;
-        })(CanvasBag.BasicSpritePrototype);
+        }(CanvasBag.BasicSpritePrototype));
         Sprites.Image = Image;
     })(Sprites = CanvasBag.Sprites || (CanvasBag.Sprites = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -472,7 +463,7 @@ var CanvasBag;
             };
         };
         return BasicShapePrototype;
-    })();
+    }());
     CanvasBag.BasicShapePrototype = BasicShapePrototype;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
@@ -512,7 +503,7 @@ var CanvasBag;
             };
             ;
             return Circle;
-        })(CanvasBag.BasicShapePrototype);
+        }(CanvasBag.BasicShapePrototype));
         BasicShapes.Circle = Circle;
     })(BasicShapes = CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -536,7 +527,7 @@ var CanvasBag;
             return points;
         };
         return PolygonUtils;
-    })();
+    }());
     CanvasBag.PolygonUtils = PolygonUtils;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="./ShapeType" />
@@ -574,7 +565,7 @@ var CanvasBag;
             };
             ;
             return Custom;
-        })(CanvasBag.BasicShapePrototype);
+        }(CanvasBag.BasicShapePrototype));
         BasicShapes.Custom = Custom;
     })(BasicShapes = CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -616,7 +607,7 @@ var CanvasBag;
             };
             ;
             return Rectangle;
-        })(CanvasBag.BasicShapePrototype);
+        }(CanvasBag.BasicShapePrototype));
         BasicShapes.Rectangle = Rectangle;
     })(BasicShapes = CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -655,7 +646,7 @@ var CanvasBag;
             };
             ;
             return Triangle;
-        })(CanvasBag.BasicShapePrototype);
+        }(CanvasBag.BasicShapePrototype));
         BasicShapes.Triangle = Triangle;
     })(BasicShapes = CanvasBag.BasicShapes || (CanvasBag.BasicShapes = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -666,7 +657,7 @@ var CanvasBag;
         }
         SceneType.BASIC = "SCENE_BASIC";
         return SceneType;
-    })();
+    }());
     CanvasBag.SceneType = SceneType;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="../../render/Point" />
@@ -715,7 +706,7 @@ var CanvasBag;
             this.properties = null;
         }
         return BasicContainerPrototype;
-    })();
+    }());
     CanvasBag.BasicContainerPrototype = BasicContainerPrototype;
 })(CanvasBag || (CanvasBag = {}));
 ///<reference path="BasicContainerPrototype.ts" />
@@ -812,7 +803,7 @@ var CanvasBag;
             };
             ;
             return SimpleContainer;
-        })(CanvasBag.BasicContainerPrototype);
+        }(CanvasBag.BasicContainerPrototype));
         BasicContainer.SimpleContainer = SimpleContainer;
     })(BasicContainer = CanvasBag.BasicContainer || (CanvasBag.BasicContainer = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -993,7 +984,7 @@ var CanvasBag;
                 this.valid = false;
             }
             return BasicScenePrototype;
-        })();
+        }());
         Scene.BasicScenePrototype = BasicScenePrototype;
     })(Scene = CanvasBag.Scene || (CanvasBag.Scene = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -1025,7 +1016,7 @@ var CanvasBag;
                 this.type = CanvasBag.SceneType.BASIC;
             }
             return Simple;
-        })(Scene.BasicScenePrototype);
+        }(Scene.BasicScenePrototype));
         Scene.Simple = Simple;
     })(Scene = CanvasBag.Scene || (CanvasBag.Scene = {}));
 })(CanvasBag || (CanvasBag = {}));
@@ -1396,7 +1387,7 @@ var CanvasBag;
             this.newConnection = null;
         }
         return Render;
-    })();
+    }());
     CanvasBag.Render = Render;
 })(CanvasBag || (CanvasBag = {}));
 

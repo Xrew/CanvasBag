@@ -3,7 +3,7 @@ window.onload = function () {
     var render = new CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = new CanvasBag.Scene.Basic();
+    var scene = new CanvasBag.Scene.Simple();
     render.addScene(scene);
 
 

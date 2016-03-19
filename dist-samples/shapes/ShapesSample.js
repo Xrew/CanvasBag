@@ -3,7 +3,7 @@ window.onload = function () {
     var render = new  CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = new  CanvasBag.Scene.Basic();
+    var scene = new  CanvasBag.Scene.Simple();
     render.addScene(scene);
 
     var rectangle = new CanvasBag.BasicShapes.Rectangle();
@@ -13,7 +13,9 @@ window.onload = function () {
         height: 100,
         borderColor: 'black',
         backgroundColor: 'yellow',
-        borderWidth: 5
+        borderWidth: 5,
+        draggable:false,
+        joinable:false
     });
     rectangle.setOnClickListener(function () {
         alert("You have clicked RECTANGLE and it is much more funny! :) ");
@@ -25,8 +27,10 @@ window.onload = function () {
         position: {x: 50, y: 50},
         radius: 20,
         borderColor: 'green',
-        borderWidth: '3',
-        backgroundColor: 'blue'
+        backgroundColor: 'blue',
+        borderWidth: 3,
+        draggable:false,
+        joinable:false
     });
     circle.setOnClickListener(function () {
         console.log("You have clicked on CIRCLE");
@@ -37,11 +41,13 @@ window.onload = function () {
     triangle.setProperties({
         points: [{x: 80, y: 80}, {x: 160, y: 80}, {x: 160, y: 180}],
         borderColor: 'black',
-        borderWidth: '3',
-        backgroundColor: 'red'
+        borderWidth: 3,
+        backgroundColor: 'red',
+        draggable:false,
+        joinable:false
     });
     triangle.setOnClickListener(function () {
-        console.log("You have clicked on CIRCLE");
+        console.log("You have clicked on TRIANGLE");
     });
     scene.addShape(triangle);
 
@@ -49,8 +55,10 @@ window.onload = function () {
     customShape.setProperties({
         points: [{x: 180, y: 80}, {x: 260, y: 80}, {x: 260, y: 160}, {x: 180, y: 160}, {x: 390, y: 100}],
         borderColor: 'blue',
-        borderWidth: '1',
-        backgroundColor: 'green'
+        borderWidth: 1,
+        backgroundColor: 'green',
+        draggable:false,
+        joinable:false
     });
     customShape.setOnClickListener(function () {
         alert("Change my color please, it is horrible!");

@@ -3,7 +3,7 @@ window.onload = function () {
     var render = new CanvasBag.Render();
     render.setCanvas(canvas);
 
-    var scene = new CanvasBag.Scene.Basic();
+    var scene = new CanvasBag.Scene.Simple();
     render.addScene(scene);
 
     var rectangle = new CanvasBag.BasicShapes.Rectangle();
@@ -14,27 +14,30 @@ window.onload = function () {
         borderColor: 'black',
         backgroundColor: 'yellow',
         borderWidth: 1,
-        draggable: true
+        draggable: true,
+        joinable:false
     });
 
     var circleLeft = new CanvasBag.BasicShapes.Circle();
-    circleLeft.setBaseProperties({
+    circleLeft.setProperties({
         position: {x: -60, y: 0},
         radius: 5,
         borderColor: 'green',
         borderWidth: 1,
         backgroundColor: 'blue',
-        draggable: false
+        draggable: false,
+        joinable:false
     });
 
     var circleRight = new CanvasBag.BasicShapes.Circle();
-    circleRight.setBaseProperties({
+    circleRight.setProperties({
         position: {x: 60, y: 0},
         radius: 5,
         borderColor: 'green',
         borderWidth: 1,
         backgroundColor: 'blue',
-        draggable: false
+        draggable: false,
+        joinable:false
     });
 
     var containerBasic = new CanvasBag.BasicContainer.SimpleContainer();
